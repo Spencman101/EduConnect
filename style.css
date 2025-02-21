@@ -1,0 +1,56 @@
+
+:root {
+    --primary-color: #396E94;
+    --secondary-color: #EFC7C2;
+    --accent-color: #A0CED9;
+    --accent-color-2: #723D46;
+    --heading-font: "Times New Roman";
+    --paragraph-font: "Kanit", sans-serif;
+}
+
+body {
+    font-size: 36px;
+    color: var(--primary-color);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    color: var(--accent-color);
+}
+
+.first-interaction {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.tutor-introduction {
+    background-color: var(--secondary-color);
+}
+
+.tutor-process {
+    background-color: var(--accent-color);
+}
+
+.purpose {
+    background-color: var(--accent-color-2);
+    color: var(--accent-color);
+}
+
+footer {
+    background-color: whitesmoke;
+    color: var(--accent-color);
+    font-size: 0.5em;
+    line-height: 0.75em;
+    padding: 25px;
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
