@@ -1,11 +1,19 @@
 
 :root {
-    --primary-color: #396E94;
+    --primary-color: #204056;
     --secondary-color: #EFC7C2;
-    --accent-color: #A0CED9;
-    --accent-color-2: #723D46;
+    --accent-color: #DCEDEF;
+    --accent-color-2: #583237;
     --heading-font: "Times New Roman";
     --paragraph-font: "Kanit", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    text-align: center;
 }
 
 body {
@@ -19,15 +27,22 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    justify-content: space-between;
-    background-color: white;
+    background-color: var(--accent-color-2);
+    color: var(--secondary-color);
+    position: fixed;
+    width: 100%;
+}
+
+header nav a, footer a {
     color: var(--accent-color);
+    text-decoration: none;
+    font-size: 20px;
 }
 
 .first-interaction {
     background-color: var(--primary-color);
     color: var(--secondary-color);
+    padding-top: 104px;
 }
 
 .tutor-introduction {
@@ -44,7 +59,7 @@ header {
 }
 
 footer {
-    background-color: whitesmoke;
+    background-color: var(--accent-color-2);
     color: var(--accent-color);
     font-size: 0.5em;
     line-height: 0.75em;
