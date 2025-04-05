@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About EduConnect - Our mission and team">
+    <title>About Us - EduConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f2438 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Images/pattern-bg.webp');
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .about-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .about-intro h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-intro p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .mission, .vision {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 2.5rem;
+            position: relative;
+        }
+        
+        .mission::before, .vision::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color-2) 100%);
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .mission h3, .vision h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .mission p, .vision p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        /* Our Team */
+        .team-section {
+            padding: 5rem 2rem;
+            background-color: var(--light-bg);
+        }
+        
+        .team-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .team-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .team-header p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .member-name {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .member-title {
+            font-size: 1rem;
+            color: var(--accent-color-2);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .member-bio {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Values Section */
+        .values-section {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .values-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .values-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .values-header p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .value-card {
+            padding: 2rem;
+            border-radius: 8px;
+            background-color: var(--light-bg);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color-2);
+        }
+        
+        .value-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .value-card p {
+            color: #555;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .value-card::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 30%;
+            height: 30%;
+            background-color: rgba(45, 156, 219, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+            transform: translate(25%, 25%);
+        }
+        
+        /* CTA Section */
+        .about-cta {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .about-cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .about-cta .btn {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .about-cta .btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-intro h2,
+            .team-header h2,
+            .values-header h2,
+            .about-cta h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .member-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>EduConnect</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tutor-portal.html">Become a Tutor</a>
+                <a href="about.html" class="active">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header-content">
+                <h1>About EduConnect</h1>
+                <p>Our mission is to make quality education accessible to everyone through personalized tutoring</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="about-content">
+                <div class="about-intro">
+                    <h2>Our Story</h2>
+                    <p>EduConnect was founded in 2022 by a group of educators and technology enthusiasts who believed that personalized learning is the key to educational success. We recognized that every student learns differently, and finding the right tutor who matches your learning style can make all the difference.</p>
+                    <p>Since our launch, we've helped thousands of students connect with qualified tutors who have helped them achieve their academic goals. Our platform continues to grow, bringing together passionate educators and eager learners from around the world.</p>
+                </div>
+
+                <div class="mission-vision">
+                    <div class="mission">
+                        <h3>Our Mission</h3>
+                        <p>To transform education by making personalized learning accessible to everyone. We strive to create a platform where students can easily find qualified tutors who match their learning style, helping them achieve their academic goals and develop a lifelong love of learning.</p>
+                        <p>We believe education should be tailored to the individual, and we're committed to using technology to make that possible on a global scale.</p>
+                    </div>
+                    <div class="vision">
+                        <h3>Our Vision</h3>
+                        <p>A world where every student has access to personalized education that helps them reach their full potential. We envision a future where geographic and economic barriers to quality education are eliminated, and where learning is an engaging, personalized experience for everyone.</p>
+                        <p>Through innovation and dedication, we're working to make this vision a reality.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="values-header">
+                <h2>Our Core Values</h2>
+                <p>These principles guide everything we do at EduConnect</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>Student Success</h3>
+                    <p>We measure our success by the success of our students. Every decision we make is guided by what will help students learn better and achieve their goals.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔄</div>
+                    <h3>Continuous Learning</h3>
+                    <p>We believe in the power of lifelong learning. We're constantly improving our platform and encouraging both tutors and students to keep growing.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Collaboration</h3>
+                    <p>Great learning happens through meaningful interactions. We foster collaboration between students, tutors, and our team to create the best educational experiences.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔍</div>
+                    <h3>Quality</h3>
+                    <p>We maintain high standards for our tutors, our platform, and our support services. We're committed to providing a quality experience at every touchpoint.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌍</div>
+                    <h3>Accessibility</h3>
+                    <p>We strive to make quality education accessible to everyone, regardless of location, background, or circumstances.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💡</div>
+                    <h3>Innovation</h3>
+                    <p>We embrace new technologies and teaching methods to continually improve the learning experience for students and tutors alike.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="team-header">
+                <h2>Meet Our Team</h2>
+                <p>The passionate individuals behind EduConnect</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="Images/team1.webp" alt="David Johnson" class="member-image">
+                    <div class="member-info">
+                        <h3 class="member-name">David Johnson</h3>
+                        <p class="member-title">Founder & CEO</p>
+                        <p class="member-bio">Former math professor with a passion for making education accessible to all. David founded EduConnect after recognizing the need for personalized learning solutions.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn profile">in</a>
+                            <a href="#" class="social-link" aria-label="Twitter profile">X</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="Images/team2.webp" alt="Sarah Chen" class="member-image">
+                    <div class="member-info">
+                        <h3 class="member-name">Sarah Chen</h3>
+                        <p class="member-title">Chief Technology Officer</p>
+                        <p class="member-bio">With a background in AI and education technology, Sarah leads our development team in creating intuitive and effective learning platforms.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn profile">in</a>
+                            <a href="#" class="social-link" aria-label="Twitter profile">X</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="Images/team3.webp" alt="Michael Rodriguez" class="member-image">
+                    <div class="member-info">
+                        <h3 class="member-name">Michael Rodriguez</h3>
+                        <p class="member-title">Head of Education</p>
+                        <p class="member-bio">An educator with 15+ years of experience, Michael ensures that our platform maintains the highest educational standards and best practices.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn profile">in</a>
+                            <a href="#" class="social-link" aria-label="Twitter profile">X</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="Images/team4.webp" alt="Aisha Patel" class="member-image">
+                    <div class="member-info">
+                        <h3 class="member-name">Aisha Patel</h3>
+                        <p class="member-title">User Experience Director</p>
+                        <p class="member-bio">Aisha brings her extensive background in UX design to ensure that our platform is intuitive, accessible, and enjoyable for all users.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn profile">in</a>
+                            <a href="#" class="social-link" aria-label="Twitter profile">X</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="about-cta">
+            <div class="about-cta-content">
+                <h2>Join the EduConnect Community</h2>
+                <p>Whether you're looking to learn, teach, or just explore what's possible with personalized education, we'd love to have you as part of our growing community.</p>
+                <a href="signup.html" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-info">
+            <h4>EduConnect &copy; 2025</h4>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="tutor-portal.html">Become a Tutor</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="social">
+            <a href="https://facebook.com" target="_blank" rel="noopener">
+                <img src="Images/facebook.webp" alt="Facebook icon" width="32" height="32" loading="lazy">
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener">
+                <img src="Images/instagram.webp" alt="Instagram icon" width="32" height="32" loading="lazy">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (sessionStorage.getItem('educonnect_logged_in') === 'true') {
+                // Update sign up buttons
+                const signupLinks = document.querySelectorAll('a[href="signup.html"]');
+                signupLinks.forEach(link => {
+                    link.href = 'dashboard.html';
+                    link.textContent = 'Go to Dashboard';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

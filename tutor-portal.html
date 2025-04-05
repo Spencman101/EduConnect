@@ -3,18 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn how EduConnect works for students and tutors">
   <title>How EduConnect Works</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9fafc;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
     .container {
       max-width: 800px;
-      margin: 0 auto;
+      margin: 120px auto 4rem;
       background-color: #ffffff;
       padding: 40px;
       border-radius: 12px;
@@ -22,26 +20,83 @@
     }
     h1 {
       text-align: center;
-      color: #2d3e50;
+      color: var(--primary-color);
       margin-bottom: 40px;
     }
     .step {
       margin-bottom: 30px;
-      padding-left: 10px;
-      border-left: 4px solid #3498db;
+      padding-left: 20px;
+      border-left: 4px solid var(--primary-color);
+      transition: transform var(--transition-speed);
+    }
+    .step:hover {
+      transform: translateX(5px);
     }
     .step h2 {
       margin: 0 0 10px;
       font-size: 1.2em;
-      color: #3498db;
+      color: var(--primary-color);
     }
     .step p {
       margin: 0;
       line-height: 1.7;
     }
+    .apply-button {
+      display: block;
+      margin: 40px auto 0;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed), transform var(--transition-speed);
+    }
+    .apply-button:hover {
+      background-color: var(--accent-color-2);
+      transform: translateY(-2px);
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-left: 1.5rem;
+    }
+    
+    .login-btn, .signup-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all var(--transition-speed);
+    }
+    
+    .login-btn {
+      background-color: transparent;
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+    }
+    
+    .login-btn:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .signup-btn {
+      background-color: var(--secondary-color);
+      color: var(--accent-color-2);
+      border: none;
+    }
+    
+    .signup-btn:hover {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+    }
+    
     @media (max-width: 600px) {
       .container {
         padding: 20px;
+        margin-top: 150px;
       }
       h1 {
         font-size: 1.5em;
@@ -49,16 +104,43 @@
       .step h2 {
         font-size: 1.1em;
       }
+      
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      
+      .auth-buttons {
+        margin: 0.5rem 0 0;
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
+  <header>
+    <nav>
+      <h1>EduConnect</h1>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <div class="auth-buttons">
+          <a href="login.html" class="login-btn">Log In</a>
+          <a href="signup.html" class="signup-btn">Sign Up</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
   <div class="container">
     <h1>How EduConnect Works for Students</h1>
 
     <div class="step">
       <h2>1. Sign Up or Log In</h2>
-      <p>Create an account or log in to get started. You’ll answer a few quick questions about your subject needs and availability so we can tailor the experience for you.</p>
+      <p>Create an account or log in to get started. You'll answer a few quick questions about your subject needs and availability so we can tailor the experience for you.</p>
     </div>
 
     <div class="step">
@@ -73,13 +155,36 @@
 
     <div class="step">
       <h2>4. Book a Session</h2>
-      <p>Pick a time that works for you from your chosen tutor’s calendar and book a session instantly. All your upcoming sessions will appear on your dashboard.</p>
+      <p>Pick a time that works for you from your chosen tutor's calendar and book a session instantly. All your upcoming sessions will appear on your dashboard.</p>
     </div>
 
     <div class="step">
       <h2>5. Learn and Share Feedback</h2>
       <p>Join your tutoring session and start learning! Afterward, leave a rating and short review to help other students and improve the tutor matching system.</p>
     </div>
+
+    <button class="apply-button" onclick="window.location.href='signup.html?type=tutor';">Apply to Become a Tutor</button>
   </div>
+
+  <footer>
+    <div class="footer-info">
+      <h4>EduConnect &copy; 2025</h4>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Log In</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
+    <div class="social">
+      <a href="https://facebook.com" target="_blank" rel="noopener">
+        <img src="Images/facebook.webp" alt="Facebook icon" width="32" height="32" loading="lazy">
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener">
+        <img src="Images/instagram.webp" alt="Instagram icon" width="32" height="32" loading="lazy">
+      </a>
+    </div>
+  </footer>
 </body>
 </html>

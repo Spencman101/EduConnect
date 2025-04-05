@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for EduConnect - Find the perfect tutor for your needs">
+    <title>Sign Up - EduConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .signup-container {
+            max-width: 600px;
+            margin: 120px auto 4rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .signup-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .signup-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: #777;
+            position: relative;
+            transition: color var(--transition-speed);
+        }
+        
+        .tab.active {
+            color: var(--primary-color);
+        }
+        
+        .tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: transparent;
+            transition: background-color var(--transition-speed);
+        }
+        
+        .tab.active::after {
+            background-color: var(--primary-color);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            flex: 1;
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: var(--paragraph-font);
+            font-size: 1rem;
+            transition: border-color var(--transition-speed);
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .terms input {
+            width: auto;
+            margin-right: 0.5rem;
+            margin-top: 0.3rem;
+        }
+        
+        .terms label {
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+        
+        .password-field {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .password-toggle:focus {
+            outline: none;
+        }
+        
+        .terms a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        .signup-button {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+        }
+        
+        .signup-button:hover {
+            background-color: var(--accent-color-2);
+            transform: translateY(-2px);
+        }
+        
+        .social-signup {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .social-signup p {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .social-signup p::before,
+        .social-signup p::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background-color: #ddd;
+        }
+        
+        .social-signup p::before {
+            left: 0;
+        }
+        
+        .social-signup p::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            border: none;
+            cursor: pointer;
+            transition: transform var(--transition-speed);
+        }
+        
+        .social-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        .social-button svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .login-link {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .login-link a {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .input-error {
+            border-color: #e74c3c;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .signup-container {
+                margin: 100px 1rem 2rem;
+                padding: 1.5rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .social-signup p::before,
+            .social-signup p::after {
+                width: 30%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>EduConnect</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tutor-portal.html">Become a Tutor</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="signup-container">
+        <div class="signup-header">
+            <h1>Create Your Account</h1>
+            <p>Join our community and find the perfect tutor for your needs</p>
+        </div>
+
+        <div class="success-message" id="success-message">
+            Your account has been created successfully! Redirecting to login page...
+        </div>
+
+        <div class="signup-tabs">
+            <div class="tab active" id="student-tab">Student</div>
+            <div class="tab" id="tutor-tab">Tutor</div>
+        </div>
+
+        <form class="signup-form" id="signup-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+                    <div class="error-message" id="first-name-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+                    <div class="error-message" id="last-name-error"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <div class="error-message" id="email-error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-field">
+                    <input type="password" id="password" name="password" placeholder="Create a password (min. 8 characters)" required minlength="8">
+                    <button type="button" class="password-toggle" id="password-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+                <div class="error-message" id="password-error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <div class="password-field">
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required minlength="8">
+                    <button type="button" class="password-toggle" id="confirm-password-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+                <div class="error-message" id="confirm-password-error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="education-level">Education Level</label>
+                <select id="education-level" name="education-level" required>
+                    <option value="" disabled selected>Select your education level</option>
+                    <option value="high-school">High School</option>
+                    <option value="undergraduate">Undergraduate</option>
+                    <option value="graduate">Graduate</option>
+                    <option value="professional">Professional</option>
+                </select>
+                <div class="error-message" id="education-level-error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject-interest">Primary Subject Interest</label>
+                <select id="subject-interest" name="subject-interest" required>
+                    <option value="" disabled selected>Select a subject</option>
+                    <option value="math">Mathematics</option>
+                    <option value="science">Science</option>
+                    <option value="english">English</option>
+                    <option value="history">History</option>
+                    <option value="foreign-language">Foreign Language</option>
+                    <option value="computer-science">Computer Science</option>
+                    <option value="other">Other</option>
+                </select>
+                <div class="error-message" id="subject-interest-error"></div>
+            </div>
+            
+            <div class="terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand that my data will be used as described in the Privacy Policy.</label>
+                <div class="error-message" id="terms-error"></div>
+            </div>
+            
+            <button type="submit" class="signup-button" id="signup-button">Sign Up</button>
+        </form>
+
+        <div class="social-signup">
+            <p>Or sign up with</p>
+            <div class="social-buttons">
+                <button class="social-button" id="google-login">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 0 1-5.279-5.28 5.27 5.27 0 0 1 5.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 0 0-8.934 8.934 8.907 8.907 0 0 0 8.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z" fill="#204056"/>
+                    </svg>
+                </button>
+                <button class="social-button" id="microsoft-login">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.6 5.82s-1.74-.5-3.59-.5c-3.61 0-6.8 2.8-6.8 6.25s3.24 6.25 6.8 6.25a9.21 9.21 0 0 0 3.44-.65v-4.55H13.7v-1.75h5.9c.44 0 .8.34.8.78v4.79a11.38 11.38 0 0 1-7.33 2.54c-4.42 0-8-3.58-8-8s3.58-8 8-8c3.72 0 5.57 1.3 5.57 1.3l-1.74 2.57z" fill="#204056"/>
+                    </svg>
+                </button>
+                <button class="social-button" id="facebook-login">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.998 12c0-6.628-5.372-12-11.999-12C5.372 0 0 5.372 0 12c0 5.988 4.388 10.952 10.124 11.852v-8.384H13.7v-3.469h5.9c.44 0 .8.34.8.78v4.79a11.38 11.38 0 0 1-7.33 2.54c-4.42 0-8-3.58-8-8s3.58-8 8-8c3.72 0 5.57 1.3 5.57 1.3l-1.74 2.57z" fill="#204056"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="login-link">
+            <p>Already have an account? <a href="login.html">Log In</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-info">
+            <h4>EduConnect &copy; 2025</h4>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="tutor-portal.html">Become a Tutor</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="social">
+            <a href="https://facebook.com" target="_blank" rel="noopener">
+                <img src="Images/facebook.webp" alt="Facebook icon" width="32" height="32" loading="lazy">
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener">
+                <img src="Images/instagram.webp" alt="Instagram icon" width="32" height="32" loading="lazy">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Simple tab switching functionality
+        const studentTab = document.getElementById('student-tab');
+        const tutorTab = document.getElementById('tutor-tab');
+        let accountType = 'student'; // Default account type
+        
+        studentTab.addEventListener('click', function() {
+            studentTab.classList.add('active');
+            tutorTab.classList.remove('active');
+            accountType = 'student';
+            // Could add logic here to show/hide different form fields
+        });
+        
+        tutorTab.addEventListener('click', function() {
+            tutorTab.classList.add('active');
+            studentTab.classList.remove('active');
+            accountType = 'tutor';
+            // Could add logic here to show/hide different form fields
+        });
+        
+        // Check for URL parameter to auto-select tutor tab
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type');
+            
+            if (type === 'tutor') {
+                tutorTab.click();
+            }
+        });
+        
+        // Password visibility toggle functionality
+        function setupPasswordToggle(passwordId, toggleId) {
+            const passwordField = document.getElementById(passwordId);
+            const passwordToggle = document.getElementById(toggleId);
+            
+            passwordToggle.addEventListener('click', function() {
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+                
+                // Change the icon based on visibility
+                if (type === 'text') {
+                    this.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    `;
+                } else {
+                    this.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    `;
+                }
+            });
+        }
+        
+        // Set up password toggles
+        setupPasswordToggle('password', 'password-toggle');
+        setupPasswordToggle('confirm-password', 'confirm-password-toggle');
+        
+        // Form validation and submission
+        const signupForm = document.getElementById('signup-form');
+        const firstNameInput = document.getElementById('first-name');
+        const lastNameInput = document.getElementById('last-name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const educationLevelInput = document.getElementById('education-level');
+        const subjectInterestInput = document.getElementById('subject-interest');
+        const termsCheckbox = document.getElementById('terms');
+        const successMessage = document.getElementById('success-message');
+        const signupButton = document.getElementById('signup-button');
+        
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+            
+            // Reset all errors
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(el => el.style.display = 'none');
+            
+            const formInputs = signupForm.querySelectorAll('input, select');
+            formInputs.forEach(input => input.classList.remove('input-error'));
+            
+            // Validate first name
+            if (!firstNameInput.value.trim()) {
+                showError(firstNameInput, 'first-name-error', 'First name is required');
+                isValid = false;
+            }
+            
+            // Validate last name
+            if (!lastNameInput.value.trim()) {
+                showError(lastNameInput, 'last-name-error', 'Last name is required');
+                isValid = false;
+            }
+            
+            // Validate email
+            const email = emailInput.value.trim();
+            if (!email) {
+                showError(emailInput, 'email-error', 'Email is required');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError(emailInput, 'email-error', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            // Validate password
+            const password = passwordInput.value;
+            if (!password) {
+                showError(passwordInput, 'password-error', 'Password is required');
+                isValid = false;
+            } else if (password.length < 8) {
+                showError(passwordInput, 'password-error', 'Password must be at least 8 characters');
+                isValid = false;
+            }
+            
+            // Validate password confirmation
+            const confirmPassword = confirmPasswordInput.value;
+            if (!confirmPassword) {
+                showError(confirmPasswordInput, 'confirm-password-error', 'Please confirm your password');
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                showError(confirmPasswordInput, 'confirm-password-error', 'Passwords do not match');
+                isValid = false;
+            }
+            
+            // Validate education level
+            if (educationLevelInput.value === "") {
+                showError(educationLevelInput, 'education-level-error', 'Please select your education level');
+                isValid = false;
+            }
+            
+            // Validate subject interest
+            if (subjectInterestInput.value === "") {
+                showError(subjectInterestInput, 'subject-interest-error', 'Please select a subject of interest');
+                isValid = false;
+            }
+            
+            // Validate terms checkbox
+            if (!termsCheckbox.checked) {
+                showError(termsCheckbox, 'terms-error', 'You must agree to the terms and conditions');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // This is where you would normally send the registration data to a server
+                // For demo purposes, we'll just simulate a successful registration
+                
+                // Show loading state
+                signupButton.disabled = true;
+                signupButton.textContent = 'Creating account...';
+                
+                // Simulate server request
+                setTimeout(function() {
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    signupForm.style.display = 'none';
+                    
+                    // Save some user info to session storage
+                    sessionStorage.setItem('educonnect_registered', 'true');
+                    sessionStorage.setItem('educonnect_name', `${firstNameInput.value.trim()} ${lastNameInput.value.trim()}`);
+                    sessionStorage.setItem('educonnect_email', email);
+                    sessionStorage.setItem('educonnect_account_type', accountType);
+                    
+                    // Redirect to login page after delay
+                    setTimeout(function() {
+                        window.location.href = 'login.html';
+                    }, 3000);
+                }, 2000);
+            }
+        });
+        
+        // Social signup handlers
+        document.getElementById('google-login').addEventListener('click', function() {
+            simulateSocialSignup('Google');
+        });
+        
+        document.getElementById('microsoft-login').addEventListener('click', function() {
+            simulateSocialSignup('Microsoft');
+        });
+        
+        document.getElementById('facebook-login').addEventListener('click', function() {
+            simulateSocialSignup('Facebook');
+        });
+        
+        // Helper functions
+        function showError(input, errorId, message) {
+            input.classList.add('input-error');
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        function simulateSocialSignup(provider) {
+            signupButton.disabled = true;
+            signupButton.textContent = `Connecting to ${provider}...`;
+            
+            setTimeout(function() {
+                // Show success message
+                successMessage.textContent = `Your account has been created with ${provider}! Redirecting...`;
+                successMessage.style.display = 'block';
+                signupForm.style.display = 'none';
+                
+                // Save login state
+                sessionStorage.setItem('educonnect_registered', 'true');
+                sessionStorage.setItem('educonnect_login_method', provider);
+                
+                // Redirect to dashboard (or login) after delay
+                setTimeout(function() {
+                    window.location.href = 'login.html';
+                }, 3000);
+            }, 2000);
+        }
+        
+        // Check if user is already registered
+        if (sessionStorage.getItem('educonnect_registered') === 'true' && 
+            sessionStorage.getItem('educonnect_logged_in') === 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

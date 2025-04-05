@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact EduConnect - Get in touch with our team">
+    <title>Contact Us - EduConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f2438 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Images/pattern-bg.webp');
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            padding-right: 2rem;
+        }
+        
+        .contact-info h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .contact-methods {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .method-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(45, 156, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            color: var(--accent-color-2);
+            font-size: 1.2rem;
+        }
+        
+        .method-details h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+        }
+        
+        .method-details p, .method-details a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            line-height: 1.5;
+        }
+        
+        .method-details a:hover {
+            color: var(--accent-color-2);
+        }
+        
+        .social-connect {
+            margin-top: 2.5rem;
+        }
+        
+        .social-connect h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .social-icon img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) saturate(100%) invert(25%) sepia(19%) saturate(1096%) hue-rotate(169deg) brightness(96%) contrast(85%);
+            transition: filter 0.3s ease;
+        }
+        
+        .social-icon:hover img {
+            filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(52deg) brightness(105%) contrast(105%);
+        }
+        
+        /* Contact Form */
+        .contact-form-container {
+            background-color: var(--light-bg);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form-container h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: white;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .submit-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-button:hover {
+            background-color: var(--accent-color-2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+        
+        .input-error {
+            border-color: #e74c3c !important;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 2rem;
+            background-color: var(--light-bg);
+        }
+        
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .faq-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .faq-header p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .accordion {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .accordion-item {
+            margin-bottom: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--primary-color);
+            transition: background-color 0.3s ease;
+        }
+        
+        .accordion-header:hover {
+            background-color: rgba(45, 156, 219, 0.05);
+        }
+        
+        .accordion-header::after {
+            content: "+";
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-item.active .accordion-header::after {
+            transform: rotate(45deg);
+        }
+        
+        .accordion-content {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .accordion-item.active .accordion-content {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 1000px;
+        }
+        
+        .accordion-content p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* Responsive Styles */
+        @media screen and (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-info h2,
+            .contact-form-container h2,
+            .faq-header h2 {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>EduConnect</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tutor-portal.html">Become a Tutor</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header-content">
+                <h1>Contact Us</h1>
+                <p>We'd love to hear from you! Reach out with any questions, feedback, or inquiries.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Get In Touch</h2>
+                    <p>Whether you have a question about our services, need technical support, or just want to say hello, our team is ready to answer all your queries.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">✉️</div>
+                            <div class="method-details">
+                                <h3>Email Us</h3>
+                                <a href="mailto:support@educonnect.com">support@educonnect.com</a>
+                                <p>We'll respond within 24 hours</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">📞</div>
+                            <div class="method-details">
+                                <h3>Call Us</h3>
+                                <a href="tel:+18001234567">+1 (800) 123-4567</a>
+                                <p>Mon-Fri from 9am to 6pm EST</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">📍</div>
+                            <div class="method-details">
+                                <h3>Visit Us</h3>
+                                <p>123 Education Lane<br>Learning City, ED 54321<br>United States</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-connect">
+                        <h3>Connect With Us</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="Facebook">
+                                <img src="Images/facebook.webp" alt="Facebook">
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <img src="Images/instagram.webp" alt="Instagram">
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Twitter">
+                                <img src="Images/twitter.webp" alt="Twitter">
+                            </a>
+                            <a href="#" class="social-icon" aria-label="LinkedIn">
+                                <img src="Images/linkedin.webp" alt="LinkedIn">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <h2>Send Us a Message</h2>
+                    <div class="success-message" id="success-message">
+                        Your message has been sent successfully! We'll get back to you soon.
+                    </div>
+                    
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your name" required>
+                                <div class="error-message" id="name-error"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Your email" required>
+                                <div class="error-message" id="email-error"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                            <div class="error-message" id="subject-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
+                            <div class="error-message" id="message-error"></div>
+                        </div>
+                        
+                        <button type="submit" class="submit-button" id="submit-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="faq-container">
+                <div class="faq-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Find quick answers to common questions about EduConnect</p>
+                </div>
+                
+                <ul class="accordion" id="faq-accordion">
+                    <li class="accordion-item">
+                        <div class="accordion-header">How do I sign up for EduConnect?</div>
+                        <div class="accordion-content">
+                            <p>Signing up for EduConnect is easy! Simply click on the "Sign Up" button at the top of the page, then fill out the registration form with your name, email, and password. You'll then be able to set up your profile and start finding tutors or students depending on your needs.</p>
+                        </div>
+                    </li>
+                    
+                    <li class="accordion-item">
+                        <div class="accordion-header">How does the tutor matching work?</div>
+                        <div class="accordion-content">
+                            <p>Our innovative matching system uses various factors to connect you with the perfect tutor. When you sign up, you'll provide information about your learning style, academic goals, and subject needs. Our algorithm then matches you with tutors who have complementary teaching styles and relevant expertise. You can browse tutor profiles, read reviews, and select the best match for your learning journey.</p>
+                        </div>
+                    </li>
+                    
+                    <li class="accordion-item">
+                        <div class="accordion-header">What subjects do you offer tutoring in?</div>
+                        <div class="accordion-content">
+                            <p>EduConnect covers a wide range of academic subjects across all educational levels. Our most popular subjects include Mathematics (algebra, calculus, statistics), Science (physics, chemistry, biology), English (writing, literature, grammar), Foreign Languages, History, Computer Science, and many more. If you need help with a specific subject not listed, you can still submit a request, and we'll try to find a qualified tutor for you.</p>
+                        </div>
+                    </li>
+                    
+                    <li class="accordion-item">
+                        <div class="accordion-header">How much does tutoring cost?</div>
+                        <div class="accordion-content">
+                            <p>Tutoring rates vary depending on the subject, tutor experience, and session duration. Each tutor sets their own rates, which are clearly displayed on their profiles. You can filter tutors based on your budget. We offer options for single sessions as well as package deals that provide discounted rates for multiple sessions. Additionally, we have a satisfaction guarantee - if you're not satisfied with your first session, we'll help you find another tutor at no additional cost.</p>
+                        </div>
+                    </li>
+                    
+                    <li class="accordion-item">
+                        <div class="accordion-header">How do I become a tutor on EduConnect?</div>
+                        <div class="accordion-content">
+                            <p>To become a tutor on EduConnect, click on the "Become a Tutor" link in the navigation menu. You'll need to fill out an application form that includes your educational background, teaching experience, and subjects you can tutor. All potential tutors undergo a verification process that includes credential checks and an interview. Once approved, you can set up your profile, establish your rates, and start connecting with students.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-info">
+            <h4>EduConnect &copy; 2025</h4>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="tutor-portal.html">Become a Tutor</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="social">
+            <a href="https://facebook.com" target="_blank" rel="noopener">
+                <img src="Images/facebook.webp" alt="Facebook icon" width="32" height="32" loading="lazy">
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener">
+                <img src="Images/instagram.webp" alt="Instagram icon" width="32" height="32" loading="lazy">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (sessionStorage.getItem('educonnect_logged_in') === 'true') {
+                // Possibly pre-fill email if they're logged in
+                const emailInput = document.getElementById('email');
+                if (emailInput && sessionStorage.getItem('educonnect_user_email')) {
+                    emailInput.value = sessionStorage.getItem('educonnect_user_email');
+                }
+            }
+            
+            // FAQ Accordion functionality
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                
+                header.addEventListener('click', function() {
+                    // Close all other items
+                    accordionItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Form validation and submission
+            const contactForm = document.getElementById('contact-form');
+            const submitButton = document.getElementById('submit-button');
+            const successMessage = document.getElementById('success-message');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Reset all errors
+                const errorElements = document.querySelectorAll('.error-message');
+                errorElements.forEach(el => el.style.display = 'none');
+                
+                const formInputs = contactForm.querySelectorAll('input, select, textarea');
+                formInputs.forEach(input => input.classList.remove('input-error'));
+                
+                // Validate name
+                const nameInput = document.getElementById('name');
+                if (!nameInput.value.trim()) {
+                    showError(nameInput, 'name-error', 'Please enter your name');
+                    isValid = false;
+                }
+                
+                // Validate email
+                const emailInput = document.getElementById('email');
+                const email = emailInput.value.trim();
+                if (!email) {
+                    showError(emailInput, 'email-error', 'Please enter your email');
+                    isValid = false;
+                } else if (!isValidEmail(email)) {
+                    showError(emailInput, 'email-error', 'Please enter a valid email address');
+                    isValid = false;
+                }
+                
+                // Validate subject
+                const subjectInput = document.getElementById('subject');
+                if (subjectInput.value === "") {
+                    showError(subjectInput, 'subject-error', 'Please select a subject');
+                    isValid = false;
+                }
+                
+                // Validate message
+                const messageInput = document.getElementById('message');
+                if (!messageInput.value.trim()) {
+                    showError(messageInput, 'message-error', 'Please enter your message');
+                    isValid = false;
+                } else if (messageInput.value.trim().length < 10) {
+                    showError(messageInput, 'message-error', 'Please enter a more detailed message');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Show loading state
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Sending...';
+                    
+                    // Simulate form submission
+                    setTimeout(function() {
+                        // Show success message
+                        successMessage.style.display = 'block';
+                        contactForm.reset();
+                        
+                        // Reset button
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Send Message';
+                        
+                        // Hide success message after a while
+                        setTimeout(function() {
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                    }, 1500);
+                }
+            });
+            
+            // Helper functions
+            function showError(input, errorId, message) {
+                input.classList.add('input-error');
+                const errorElement = document.getElementById(errorId);
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.style.display = 'block';
+                }
+            }
+            
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+        });
+    </script>
+</body>
+</html>

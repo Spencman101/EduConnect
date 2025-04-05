@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to EduConnect - Access your personalized tutoring experience">
+    <title>Login to EduConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .login-container {
+            max-width: 500px;
+            margin: 120px auto 4rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .password-toggle-container {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .login-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-button:hover {
+            background-color: var(--accent-color-2);
+        }
+        
+        .forgot-password {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .forgot-password a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .social-login {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .social-login p {
+            margin-bottom: 1rem;
+            color: #555;
+            position: relative;
+        }
+        
+        .social-login p::before,
+        .social-login p::after {
+            content: "";
+            display: inline-block;
+            width: 40%;
+            height: 1px;
+            background: #ddd;
+            vertical-align: middle;
+            margin: 0 0.5rem;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-button {
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-button svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .create-account {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .create-account a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .input-error {
+            border-color: #e74c3c !important;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>EduConnect</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tutor-portal.html">Become a Tutor</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Welcome Back!</h2>
+            <p>Log in to your EduConnect account</p>
+        </div>
+        
+        <div class="success-message" id="success-message">
+            Login successful! Redirecting to dashboard...
+        </div>
+
+        <form class="login-form" id="login-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <div class="error-message" id="email-error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-toggle-container">
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <button type="button" class="password-toggle" id="password-toggle">
+                        Show
+                    </button>
+                </div>
+                <div class="error-message" id="password-error"></div>
+            </div>
+            
+            <button type="submit" class="login-button" id="login-button">Log In</button>
+            
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+            </div>
+        </form>
+        
+        <div class="social-login">
+            <p>Or log in with</p>
+            <div class="social-buttons">
+                <button class="social-button" id="google-login">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 0 1-5.279-5.28 5.27 5.27 0 0 1 5.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 0 0-8.934 8.934 8.907 8.907 0 0 0 8.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z" fill="#204056"/>
+                    </svg>
+                </button>
+                <button class="social-button" id="microsoft-login">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zM24 11.4H12.6V0H24v11.4z" fill="#204056"/>
+                    </svg>
+                </button>
+                <button class="social-button" id="facebook-login">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.64c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#204056"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="create-account">
+            <p>Don't have an account? <a href="signup.html">Sign up now</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-info">
+            <h4>EduConnect &copy; 2025</h4>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="tutor-portal.html">Become a Tutor</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="social">
+            <a href="https://facebook.com" target="_blank" rel="noopener">
+                <img src="Images/facebook.webp" alt="Facebook icon" width="32" height="32" loading="lazy">
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener">
+                <img src="Images/instagram.webp" alt="Instagram icon" width="32" height="32" loading="lazy">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Check if user is already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('educonnect_logged_in') === 'true') {
+                window.location.href = 'dashboard.html';
+            }
+        });
+        
+        // Password toggle functionality
+        const passwordToggle = document.getElementById('password-toggle');
+        const passwordInput = document.getElementById('password');
+        
+        passwordToggle.addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.textContent = 'Show';
+            }
+        });
+        
+        // Form validation and submission
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const loginButton = document.getElementById('login-button');
+        const successMessage = document.getElementById('success-message');
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+            
+            // Reset all errors
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(el => el.style.display = 'none');
+            
+            const formInputs = loginForm.querySelectorAll('input');
+            formInputs.forEach(input => input.classList.remove('input-error'));
+            
+            // Validate email
+            const email = emailInput.value.trim();
+            if (!email) {
+                showError(emailInput, 'email-error', 'Email is required');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError(emailInput, 'email-error', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            // Validate password
+            if (!passwordInput.value) {
+                showError(passwordInput, 'password-error', 'Password is required');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Show loading state
+                loginButton.disabled = true;
+                loginButton.textContent = 'Logging in...';
+                
+                // Simulate login request
+                setTimeout(function() {
+                    // For demo: accept any valid email/password combination
+                    // In a real app, you would validate credentials against a server
+                    
+                    // Store login information
+                    sessionStorage.setItem('educonnect_logged_in', 'true');
+                    sessionStorage.setItem('educonnect_user_email', email);
+                    sessionStorage.setItem('educonnect_name', 'Demo User');
+                    
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    loginForm.style.display = 'none';
+                    
+                    // Redirect to dashboard after delay
+                    setTimeout(function() {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                }, 1500);
+            }
+        });
+        
+        // Social login handlers
+        document.getElementById('google-login').addEventListener('click', function() {
+            simulateSocialLogin('Google');
+        });
+        
+        document.getElementById('microsoft-login').addEventListener('click', function() {
+            simulateSocialLogin('Microsoft');
+        });
+        
+        document.getElementById('facebook-login').addEventListener('click', function() {
+            simulateSocialLogin('Facebook');
+        });
+        
+        // Helper functions
+        function showError(input, errorId, message) {
+            input.classList.add('input-error');
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        function simulateSocialLogin(provider) {
+            loginButton.disabled = true;
+            loginButton.textContent = `Connecting to ${provider}...`;
+            
+            setTimeout(function() {
+                // Store login information
+                sessionStorage.setItem('educonnect_logged_in', 'true');
+                sessionStorage.setItem('educonnect_name', 'Social User');
+                sessionStorage.setItem('educonnect_login_method', provider);
+                
+                // Show success message
+                successMessage.textContent = `Logged in with ${provider}! Redirecting...`;
+                successMessage.style.display = 'block';
+                loginForm.style.display = 'none';
+                
+                // Redirect to dashboard after delay
+                setTimeout(function() {
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html> 

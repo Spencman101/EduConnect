@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduConnect Dashboard - Find tutors and subjects">
+    <title>Dashboard - EduConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 100px auto 4rem;
+            padding: 0 1rem;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .welcome-user {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        
+        .subjects-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+        
+        .subjects-sidebar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .subjects-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .subject-category {
+            margin-bottom: 1.5rem;
+        }
+        
+        .category-name {
+            font-weight: 500;
+            color: var(--secondary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dropdown-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .category-name.open .dropdown-icon {
+            transform: rotate(180deg);
+        }
+        
+        .category-topics {
+            list-style: none;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .category-topics.open {
+            max-height: 500px;
+        }
+        
+        .category-topics li {
+            margin: 0.5rem 0;
+        }
+        
+        .category-topics a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .category-topics a:hover {
+            color: var(--primary-color);
+        }
+        
+        .tutors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tutor-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tutor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tutor-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .tutor-info {
+            padding: 1.5rem;
+        }
+        
+        .tutor-name {
+            font-size: 1.2rem;
+            margin: 0 0 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .tutor-subject {
+            color: var(--accent-color-2);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tutor-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stars {
+            color: #ffc107;
+            margin-right: 0.5rem;
+        }
+        
+        .tutor-description {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .tutor-price {
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .book-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        
+        .book-button:hover {
+            background-color: var(--accent-color-2);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .profile-dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            width: 200px;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.open {
+            display: block;
+        }
+        
+        .dropdown-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .dropdown-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .dropdown-menu a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .logout-btn {
+            color: #e74c3c;
+            border-top: 1px solid #eee;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+        }
+        
+        .subject-details {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .subject-details.active {
+            display: block;
+        }
+        
+        .subject-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .subject-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .close-subject {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #777;
+        }
+        
+        .subject-content {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .subject-resources {
+            margin-top: 1.5rem;
+        }
+        
+        .resource-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .resource-item {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+        
+        .resource-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .resource-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .resource-type {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 0.5rem;
+        }
+        
+        @media screen and (max-width: 900px) {
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .subjects-sidebar {
+                order: 2;
+            }
+        }
+        
+        @media screen and (max-width: 600px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .tutors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>EduConnect</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tutor-portal.html">Become a Tutor</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="welcome-user">Welcome, <span id="user-name">Student</span>!</h1>
+            <div class="user-profile">
+                <div class="profile-dropdown">
+                    <img src="Images/default-profile.webp" alt="Profile" class="profile-pic" id="profile-pic">
+                    <div class="dropdown-menu" id="dropdown-menu">
+                        <ul>
+                            <li><a href="#">My Profile</a></li>
+                            <li><a href="#">My Bookings</a></li>
+                            <li><a href="#">Messages</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="#" class="logout-btn" id="logout-btn">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="subjects-filter">
+            <button class="filter-btn active" data-filter="all">All Subjects</button>
+            <button class="filter-btn" data-filter="mathematics">Mathematics</button>
+            <button class="filter-btn" data-filter="english">English</button>
+            <button class="filter-btn" data-filter="science">Science</button>
+            <button class="filter-btn" data-filter="history">History</button>
+            <button class="filter-btn" data-filter="language">Languages</button>
+            <button class="filter-btn" data-filter="computer-science">Computer Science</button>
+        </div>
+
+        <div id="subject-details" class="subject-details">
+            <!-- Subject details will be populated dynamically -->
+        </div>
+
+        <div class="dashboard-content">
+            <div class="subjects-sidebar">
+                <h3 class="sidebar-title">Browse Subjects</h3>
+                <ul class="subjects-list">
+                    <li class="subject-category">
+                        <div class="category-name" data-category="math">
+                            Mathematics
+                            <span class="dropdown-icon">▼</span>
+                        </div>
+                        <ul class="category-topics" id="math-topics">
+                            <li><a href="#" data-subject="algebra">Algebra</a></li>
+                            <li><a href="#" data-subject="calculus">Calculus</a></li>
+                            <li><a href="#" data-subject="geometry">Geometry</a></li>
+                            <li><a href="#" data-subject="trigonometry">Trigonometry</a></li>
+                            <li><a href="#" data-subject="statistics">Statistics & Probability</a></li>
+                            <li><a href="#" data-subject="precalculus">Precalculus</a></li>
+                            <li><a href="#" data-subject="linear-algebra">Linear Algebra</a></li>
+                            <li><a href="#" data-subject="differential-equations">Differential Equations</a></li>
+                            <li><a href="#" data-subject="discrete-math">Discrete Mathematics</a></li>
+                            <li><a href="#" data-subject="number-theory">Number Theory</a></li>
+                        </ul>
+                    </li>
+                    <li class="subject-category">
+                        <div class="category-name" data-category="english">
+                            English
+                            <span class="dropdown-icon">▼</span>
+                        </div>
+                        <ul class="category-topics" id="english-topics">
+                            <li><a href="#" data-subject="composition">Composition & Writing</a></li>
+                            <li><a href="#" data-subject="literature">Literature Analysis</a></li>
+                            <li><a href="#" data-subject="grammar">Grammar & Syntax</a></li>
+                            <li><a href="#" data-subject="creative-writing">Creative Writing</a></li>
+                            <li><a href="#" data-subject="public-speaking">Public Speaking</a></li>
+                            <li><a href="#" data-subject="essay-writing">Essay Writing</a></li>
+                            <li><a href="#" data-subject="reading-comprehension">Reading Comprehension</a></li>
+                            <li><a href="#" data-subject="poetry">Poetry Analysis</a></li>
+                        </ul>
+                    </li>
+                    <li class="subject-category">
+                        <div class="category-name" data-category="science">
+                            Science
+                            <span class="dropdown-icon">▼</span>
+                        </div>
+                        <ul class="category-topics" id="science-topics">
+                            <li><a href="#" data-subject="biology">Biology</a></li>
+                            <li><a href="#" data-subject="chemistry">Chemistry</a></li>
+                            <li><a href="#" data-subject="physics">Physics</a></li>
+                            <li><a href="#" data-subject="earth-science">Earth Science</a></li>
+                            <li><a href="#" data-subject="astronomy">Astronomy</a></li>
+                            <li><a href="#" data-subject="environmental-science">Environmental Science</a></li>
+                            <li><a href="#" data-subject="anatomy">Anatomy & Physiology</a></li>
+                            <li><a href="#" data-subject="organic-chemistry">Organic Chemistry</a></li>
+                            <li><a href="#" data-subject="biochemistry">Biochemistry</a></li>
+                        </ul>
+                    </li>
+                    <li class="subject-category">
+                        <div class="category-name" data-category="history">
+                            History
+                            <span class="dropdown-icon">▼</span>
+                        </div>
+                        <ul class="category-topics" id="history-topics">
+                            <li><a href="#" data-subject="world-history">World History</a></li>
+                            <li><a href="#" data-subject="us-history">U.S. History</a></li>
+                            <li><a href="#" data-subject="european-history">European History</a></li>
+                            <li><a href="#" data-subject="ancient-history">Ancient History</a></li>
+                        </ul>
+                    </li>
+                    <li class="subject-category">
+                        <div class="category-name" data-category="languages">
+                            Foreign Languages
+                            <span class="dropdown-icon">▼</span>
+                        </div>
+                        <ul class="category-topics" id="languages-topics">
+                            <li><a href="#" data-subject="spanish">Spanish</a></li>
+                            <li><a href="#" data-subject="french">French</a></li>
+                            <li><a href="#" data-subject="german">German</a></li>
+                            <li><a href="#" data-subject="chinese">Chinese</a></li>
+                            <li><a href="#" data-subject="japanese">Japanese</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tutors-content">
+                <div class="tutors-grid" id="tutors-grid">
+                    <!-- Tutor cards will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-info">
+            <h4>EduConnect &copy; 2025</h4>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="tutor-portal.html">Become a Tutor</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="social">
+            <a href="https://facebook.com" target="_blank" rel="noopener">
+                <img src="Images/facebook.webp" alt="Facebook icon" width="32" height="32" loading="lazy">
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener">
+                <img src="Images/instagram.webp" alt="Instagram icon" width="32" height="32" loading="lazy">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Check if user is logged in, redirect to login if not
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('educonnect_logged_in') !== 'true') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Set user name and possibly profile pic
+            const userName = document.getElementById('user-name');
+            if (sessionStorage.getItem('educonnect_name')) {
+                userName.textContent = sessionStorage.getItem('educonnect_name').split(' ')[0];
+            } else if (sessionStorage.getItem('educonnect_user_email')) {
+                userName.textContent = sessionStorage.getItem('educonnect_user_email').split('@')[0];
+            }
+            
+            // Toggle profile dropdown
+            const profilePic = document.getElementById('profile-pic');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            
+            profilePic.addEventListener('click', function() {
+                dropdownMenu.classList.toggle('open');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!profilePic.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.remove('open');
+                }
+            });
+            
+            // Handle logout
+            document.getElementById('logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Clear login session storage
+                sessionStorage.removeItem('educonnect_logged_in');
+                
+                // Redirect to login page
+                window.location.href = 'login.html';
+            });
+            
+            // Toggle subject categories
+            const categoryNames = document.querySelectorAll('.category-name');
+            
+            categoryNames.forEach(category => {
+                category.addEventListener('click', function() {
+                    this.classList.toggle('open');
+                    const topics = this.nextElementSibling;
+                    topics.classList.toggle('open');
+                });
+            });
+            
+            // Initialize tutors
+            initializeTutors();
+            
+            // Handle subject filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter tutors based on the selected subject
+                    const filter = this.getAttribute('data-filter');
+                    filterTutors(filter);
+                });
+            });
+            
+            // Handle subject topic clicks
+            const subjectLinks = document.querySelectorAll('.category-topics a');
+            
+            subjectLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const subject = this.getAttribute('data-subject');
+                    showSubjectDetails(subject);
+                });
+            });
+        });
+        
+        // Tutor data (in a real application, this would come from a database)
+        const tutorsData = [
+            {
+                id: 1,
+                name: "Dr. Sarah Johnson",
+                image: "Images/tutor1.webp",
+                subject: "Mathematics",
+                specialization: "Calculus, Differential Equations",
+                rating: 4.9,
+                reviews: 128,
+                description: "PhD in Mathematics with 10+ years of teaching experience. Specializes in calculus and differential equations.",
+                price: "$40/hour",
+                category: "mathematics"
+            },
+            {
+                id: 2,
+                name: "Prof. Michael Chen",
+                image: "Images/tutor2.webp",
+                subject: "Physics",
+                specialization: "Mechanics, Electromagnetism",
+                rating: 4.8,
+                reviews: 95,
+                description: "Physics professor with expertise in classical mechanics and electromagnetism. Makes complex concepts easy to understand.",
+                price: "$45/hour",
+                category: "science"
+            },
+            {
+                id: 3,
+                name: "Emma Rodriguez",
+                image: "Images/tutor3.webp",
+                subject: "English Literature",
+                specialization: "Essay Writing, Critical Analysis",
+                rating: 4.7,
+                reviews: 112,
+                description: "Published author and English teacher specializing in essay writing and literary analysis for high school and college students.",
+                price: "$35/hour",
+                category: "english"
+            },
+            {
+                id: 4,
+                name: "Dr. James Wilson",
+                image: "Images/tutor4.webp",
+                subject: "Chemistry",
+                specialization: "Organic Chemistry, Biochemistry",
+                rating: 4.9,
+                reviews: 85,
+                description: "Chemistry professor with a focus on organic chemistry and biochemistry. Patient and methodical teaching approach.",
+                price: "$42/hour",
+                category: "science"
+            },
+            {
+                id: 5,
+                name: "Lisa Thompson",
+                image: "Images/tutor5.webp",
+                subject: "Mathematics",
+                specialization: "Algebra, Geometry",
+                rating: 4.6,
+                reviews: 75,
+                description: "Math teacher with 8 years of experience helping students master algebra and geometry concepts with practical examples.",
+                price: "$38/hour",
+                category: "mathematics"
+            },
+            {
+                id: 6,
+                name: "Robert Davis",
+                image: "Images/tutor6.webp",
+                subject: "Computer Science",
+                specialization: "Programming, Algorithms",
+                rating: 4.8,
+                reviews: 92,
+                description: "Software engineer and CS instructor specializing in programming fundamentals, algorithms, and data structures.",
+                price: "$50/hour",
+                category: "computer-science"
+            },
+            {
+                id: 7,
+                name: "Maria Garcia",
+                image: "Images/tutor7.webp",
+                subject: "Spanish",
+                specialization: "Conversation, Grammar",
+                rating: 4.9,
+                reviews: 65,
+                description: "Native Spanish speaker with a degree in education. Focuses on conversational skills and practical grammar applications.",
+                price: "$35/hour",
+                category: "language"
+            },
+            {
+                id: 8,
+                name: "David Kim",
+                image: "Images/tutor8.webp",
+                subject: "Biology",
+                specialization: "Genetics, Cell Biology",
+                rating: 4.7,
+                reviews: 88,
+                description: "Biology researcher and educator with expertise in genetics and cellular biology. Makes complex biology concepts accessible.",
+                price: "$40/hour",
+                category: "science"
+            },
+            {
+                id: 9,
+                name: "Jennifer Lewis",
+                image: "Images/tutor9.webp",
+                subject: "English",
+                specialization: "Grammar, Writing Skills",
+                rating: 4.8,
+                reviews: 110,
+                description: "English teacher specializing in grammar, writing skills, and essay structure for students of all levels.",
+                price: "$36/hour",
+                category: "english"
+            },
+            {
+                id: 10,
+                name: "Prof. Thomas Wright",
+                image: "Images/tutor10.webp",
+                subject: "History",
+                specialization: "World History, U.S. History",
+                rating: 4.9,
+                reviews: 75,
+                description: "History professor with a passion for making historical events engaging and relevant to today's students.",
+                price: "$38/hour",
+                category: "history"
+            },
+            {
+                id: 11,
+                name: "Sophia Martinez",
+                image: "Images/tutor11.webp",
+                subject: "Mathematics",
+                specialization: "Statistics, Probability",
+                rating: 4.7,
+                reviews: 82,
+                description: "Statistician and math educator specializing in making statistics and probability concepts clear and practical.",
+                price: "$39/hour",
+                category: "mathematics"
+            },
+            {
+                id: 12,
+                name: "Dr. Alexander Lee",
+                image: "Images/tutor12.webp",
+                subject: "Physics",
+                specialization: "Quantum Mechanics, Relativity",
+                rating: 4.8,
+                reviews: 67,
+                description: "Physics PhD with expertise in advanced topics like quantum mechanics and relativity. Excellent at simplifying complex theories.",
+                price: "$48/hour",
+                category: "science"
+            }
+        ];
+        
+        // Subject content data
+        const subjectsData = {
+            "algebra": {
+                title: "Algebra",
+                content: `<p>Algebra is a branch of mathematics dealing with symbols and the rules for manipulating these symbols. It is central to all of mathematics and forms the foundation for mathematical reasoning and problem-solving.</p>
+                <p>Our tutors can help with:</p>
+                <ul>
+                    <li>Linear equations and inequalities</li>
+                    <li>Quadratic equations</li>
+                    <li>Polynomials and factoring</li>
+                    <li>Systems of equations</li>
+                    <li>Functions and their graphs</li>
+                    <li>Exponents and logarithms</li>
+                </ul>`,
+                resources: [
+                    { title: "Algebra Fundamentals", type: "Video Course" },
+                    { title: "Practice Problems Set 1", type: "Worksheet" },
+                    { title: "Quadratic Equations Deep Dive", type: "Tutorial" },
+                    { title: "Algebra Formula Sheet", type: "PDF" }
+                ]
+            },
+            "calculus": {
+                title: "Calculus",
+                content: `<p>Calculus is the mathematical study of continuous change. It has two major branches: differential calculus and integral calculus, which are related by the fundamental theorem of calculus.</p>
+                <p>Our tutors can help with:</p>
+                <ul>
+                    <li>Limits and continuity</li>
+                    <li>Derivatives and differentiation rules</li>
+                    <li>Applications of derivatives</li>
+                    <li>Integrals and integration techniques</li>
+                    <li>Applications of integrals</li>
+                    <li>Sequences and series</li>
+                    <li>Multivariable calculus</li>
+                </ul>`,
+                resources: [
+                    { title: "Calculus I Complete Course", type: "Video Series" },
+                    { title: "Derivative Practice Problems", type: "Interactive" },
+                    { title: "Integration Techniques Guide", type: "eBook" },
+                    { title: "Calculus Formula Sheet", type: "PDF" }
+                ]
+            },
+            "composition": {
+                title: "Composition & Writing",
+                content: `<p>Composition is the art of writing clear, effective prose. It encompasses everything from basic sentence structure to complex argumentative essays.</p>
+                <p>Our tutors can help with:</p>
+                <ul>
+                    <li>Essay structure and organization</li>
+                    <li>Thesis development</li>
+                    <li>Paragraph construction</li>
+                    <li>Rhetoric and persuasive writing</li>
+                    <li>Research papers</li>
+                    <li>Citation methods (MLA, APA, Chicago)</li>
+                    <li>Editing and revision strategies</li>
+                </ul>`,
+                resources: [
+                    { title: "Essay Writing Fundamentals", type: "Course" },
+                    { title: "Structure & Organization Guide", type: "PDF" },
+                    { title: "Citation Styles Handbook", type: "Reference" },
+                    { title: "Editing Checklist", type: "Worksheet" }
+                ]
+            },
+            "biology": {
+                title: "Biology",
+                content: `<p>Biology is the natural science that studies life and living organisms, including their physical structure, chemical processes, molecular interactions, physiological mechanisms, development, and evolution.</p>
+                <p>Our tutors can help with:</p>
+                <ul>
+                    <li>Cell biology and cellular processes</li>
+                    <li>Genetics and heredity</li>
+                    <li>Evolution and natural selection</li>
+                    <li>Ecology and ecosystems</li>
+                    <li>Human anatomy and physiology</li>
+                    <li>Molecular biology</li>
+                    <li>Microbiology</li>
+                </ul>`,
+                resources: [
+                    { title: "Biology Foundations", type: "Video Course" },
+                    { title: "Cellular Processes Animations", type: "Interactive" },
+                    { title: "Genetics Problem Set", type: "Worksheet" },
+                    { title: "Human Anatomy Guide", type: "Reference" }
+                ]
+            }
+            // More subjects could be added here
+        };
+        
+        // Initialize tutors grid
+        function initializeTutors() {
+            const tutorsGrid = document.getElementById('tutors-grid');
+            tutorsGrid.innerHTML = '';
+            
+            tutorsData.forEach(tutor => {
+                const tutorCard = createTutorCard(tutor);
+                tutorsGrid.appendChild(tutorCard);
+            });
+        }
+        
+        // Create tutor card element
+        function createTutorCard(tutor) {
+            const card = document.createElement('div');
+            card.className = 'tutor-card';
+            card.setAttribute('data-category', tutor.category);
+            
+            card.innerHTML = `
+                <img src="${tutor.image}" alt="${tutor.name}" class="tutor-image">
+                <div class="tutor-info">
+                    <h3 class="tutor-name">${tutor.name}</h3>
+                    <p class="tutor-subject">${tutor.subject}: ${tutor.specialization}</p>
+                    <div class="tutor-rating">
+                        <div class="stars">★★★★★</div>
+                        <span>${tutor.rating} (${tutor.reviews} reviews)</span>
+                    </div>
+                    <p class="tutor-description">${tutor.description}</p>
+                    <p class="tutor-price">${tutor.price}</p>
+                    <button class="book-button">Book Session</button>
+                </div>
+            `;
+            
+            // Add event listener to book button
+            const bookButton = card.querySelector('.book-button');
+            bookButton.addEventListener('click', function() {
+                alert(`Booking session with ${tutor.name}. This would lead to a scheduling page in a real application.`);
+            });
+            
+            return card;
+        }
+        
+        // Filter tutors based on selected subject
+        function filterTutors(filter) {
+            const tutorCards = document.querySelectorAll('.tutor-card');
+            
+            tutorCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Show subject details
+        function showSubjectDetails(subject) {
+            const subjectDetails = document.getElementById('subject-details');
+            const subjectData = subjectsData[subject];
+            
+            if (!subjectData) {
+                alert('Subject content coming soon!');
+                return;
+            }
+            
+            let resourcesHTML = '';
+            if (subjectData.resources && subjectData.resources.length > 0) {
+                resourcesHTML = `
+                    <div class="subject-resources">
+                        <h4>Resources</h4>
+                        <ul class="resource-list">
+                            ${subjectData.resources.map(resource => `
+                                <li class="resource-item">
+                                    <a href="#">${resource.title}</a>
+                                    <div class="resource-type">${resource.type}</div>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            subjectDetails.innerHTML = `
+                <div class="subject-header">
+                    <h2 class="subject-title">${subjectData.title}</h2>
+                    <button class="close-subject" id="close-subject">×</button>
+                </div>
+                <div class="subject-content">
+                    ${subjectData.content}
+                    ${resourcesHTML}
+                </div>
+            `;
+            
+            subjectDetails.classList.add('active');
+            
+            // Handle close button
+            document.getElementById('close-subject').addEventListener('click', function() {
+                subjectDetails.classList.remove('active');
+            });
+            
+            // Filter tutors based on the selected subject (if possible)
+            const relatedCategory = getRelatedCategory(subject);
+            if (relatedCategory) {
+                // Find and click the appropriate filter button
+                const filterBtn = document.querySelector(`.filter-btn[data-filter="${relatedCategory}"]`);
+                if (filterBtn) {
+                    filterBtn.click();
+                }
+            }
+        }
+        
+        // Get related category for a subject
+        function getRelatedCategory(subject) {
+            const mathSubjects = ['algebra', 'calculus', 'geometry', 'trigonometry', 'statistics', 'precalculus', 
+                                 'linear-algebra', 'differential-equations', 'discrete-math', 'number-theory'];
+            
+            const englishSubjects = ['composition', 'literature', 'grammar', 'creative-writing', 'public-speaking',
+                                    'essay-writing', 'reading-comprehension', 'poetry'];
+            
+            const scienceSubjects = ['biology', 'chemistry', 'physics', 'earth-science', 'astronomy',
+                                    'environmental-science', 'anatomy', 'organic-chemistry', 'biochemistry'];
+            
+            const historySubjects = ['world-history', 'us-history', 'european-history', 'ancient-history'];
+            
+            const languageSubjects = ['spanish', 'french', 'german', 'chinese', 'japanese'];
+            
+            if (mathSubjects.includes(subject)) return 'mathematics';
+            if (englishSubjects.includes(subject)) return 'english';
+            if (scienceSubjects.includes(subject)) return 'science';
+            if (historySubjects.includes(subject)) return 'history';
+            if (languageSubjects.includes(subject)) return 'language';
+            
+            return null;
+        }
+    </script>
+</body>
+</html>

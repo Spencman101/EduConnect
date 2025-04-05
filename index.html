@@ -3,87 +3,642 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
-    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    <meta name="description" content="EduConnect - Connect with top tutors in your area for personalized learning experiences">
+    <title>EduConnect - Find Your Perfect Tutor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f2438 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Images/pattern-bg.webp');
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color-2);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* How it Works Section */
+        .how-it-works {
+            padding: 5rem 2rem;
+            background-color: var(--light-bg);
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            position: relative;
+            text-align: center;
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .step h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .step p {
+            color: #666;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-quote {
+            font-size: 2rem;
+            color: var(--accent-color-2);
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            opacity: 0.3;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .author-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .btn-cta {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 0.8rem 1.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-cta:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-3px);
+        }
+        
+        .btn-cta-outline {
+            border: 2px solid white;
+            background-color: transparent;
+            color: white;
+            padding: 0.8rem 1.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-cta-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Subject Categories */
+        .categories {
+            padding: 5rem 2rem;
+            background-color: var(--light-bg);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-img {
+            height: 150px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .category-content {
+            padding: 1.5rem;
+        }
+        
+        .category-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .category-content p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-topic {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+        
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav>
             <h1>EduConnect</h1>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="tutor-portal.html">Become a Tutor</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Find Your Perfect Tutor Today</h1>
+                <p>Connect with top tutors in your area for personalized learning experiences that help you excel in your studies</p>
+                <div class="hero-buttons">
+                    <a href="signup.html" class="btn">Sign Up Now</a>
+                    <a href="#how-it-works" class="btn btn-outline">How It Works</a>
+                </div>
+                <img src="Images/tutoring.jpg" alt="Students learning with tutors" class="hero-image" width="700" height="400" loading="eager">
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="section-title">
+                <h2>Why Choose EduConnect?</h2>
+                <p>We provide a comprehensive platform designed to connect students with qualified tutors for personalized learning experiences</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>Qualified Tutors</h3>
+                    <p>Our tutors are verified experts with extensive experience in their subjects, ensuring high-quality instruction.</p>
+                    <a href="#" class="btn btn-outline">Find a Tutor</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Perfect Match</h3>
+                    <p>Our advanced matching algorithm connects you with tutors that fit your specific learning style and needs.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Flexible Learning</h3>
+                    <p>Choose between online and in-person sessions that fit your schedule and preferred learning environment.</p>
+                    <a href="#" class="btn btn-outline">View Options</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="section-title">
+                <h2>How EduConnect Works</h2>
+                <p>Getting started with EduConnect is simple and straightforward</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create Your Account</h3>
+                    <p>Sign up and complete your profile with your learning goals and preferences.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Find Your Tutor</h3>
+                    <p>Browse through our qualified tutors and filter by subject, price, and availability.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Book a Session</h3>
+                    <p>Schedule a session with your chosen tutor at a time that works for you.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Start Learning</h3>
+                    <p>Connect with your tutor and begin your personalized learning experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subject Categories -->
+        <section class="categories">
+            <div class="section-title">
+                <h2>Popular Subject Categories</h2>
+                <p>Explore our wide range of subjects with expert tutors ready to help</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <img src="Images/math-category.webp" alt="Mathematics" class="category-img">
+                    <div class="category-content">
+                        <h3>Mathematics</h3>
+                        <p>Master mathematical concepts with expert guidance</p>
+                        <div class="category-topics">
+                            <span class="category-topic">Algebra</span>
+                            <span class="category-topic">Calculus</span>
+                            <span class="category-topic">Geometry</span>
+                        </div>
+                        <a href="dashboard.html" class="btn btn-outline">Find Tutors</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="Images/science-category.webp" alt="Science" class="category-img">
+                    <div class="category-content">
+                        <h3>Science</h3>
+                        <p>Explore scientific principles with hands-on learning</p>
+                        <div class="category-topics">
+                            <span class="category-topic">Physics</span>
+                            <span class="category-topic">Chemistry</span>
+                            <span class="category-topic">Biology</span>
+                        </div>
+                        <a href="dashboard.html" class="btn btn-outline">Find Tutors</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="Images/english-category.webp" alt="English" class="category-img">
+                    <div class="category-content">
+                        <h3>English</h3>
+                        <p>Improve your writing, reading, and speaking skills</p>
+                        <div class="category-topics">
+                            <span class="category-topic">Writing</span>
+                            <span class="category-topic">Literature</span>
+                            <span class="category-topic">Grammar</span>
+                        </div>
+                        <a href="dashboard.html" class="btn btn-outline">Find Tutors</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="Images/language-category.webp" alt="Languages" class="category-img">
+                    <div class="category-content">
+                        <h3>Languages</h3>
+                        <p>Learn new languages with native-speaking tutors</p>
+                        <div class="category-topics">
+                            <span class="category-topic">Spanish</span>
+                            <span class="category-topic">French</span>
+                            <span class="category-topic">Chinese</span>
+                        </div>
+                        <a href="dashboard.html" class="btn btn-outline">Find Tutors</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="section-title">
+                <h2>What Our Students Say</h2>
+                <p>Read about the experiences of students who have found success with EduConnect</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">My son was struggling with calculus until we found his tutor through EduConnect. His grades improved dramatically in just a few weeks, and he now feels confident in his math abilities.</p>
+                    <div class="testimonial-author">
+                        <img src="Images/testimonial1.webp" alt="Sarah Johnson" class="author-image">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Parent of High School Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">EduConnect made it easy to find a qualified tutor for my physics course. The personalized lessons were exactly what I needed to understand the complex concepts and ace my exams.</p>
+                    <div class="testimonial-author">
+                        <img src="Images/testimonial2.webp" alt="David Chen" class="author-image">
+                        <div class="author-info">
+                            <h4>David Chen</h4>
+                            <p>University Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">As someone learning English as a second language, finding the right tutor was crucial. My EduConnect tutor tailored lessons to my needs and helped me become fluent much faster than I expected.</p>
+                    <div class="testimonial-author">
+                        <img src="Images/testimonial3.webp" alt="Maria Rodriguez" class="author-image">
+                        <div class="author-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>ESL Student</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Learning Experience?</h2>
+                <p>Join thousands of students who have achieved academic success with EduConnect's personalized tutoring services.</p>
+                <div class="cta-buttons">
+                    <a href="signup.html" class="btn btn-cta">Get Started Today</a>
+                    <a href="tutor-portal.html" class="btn btn-cta-outline">Become a Tutor</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-info">
+            <h4>EduConnect &copy; 2025</h4>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
             <a href="tutor-portal.html">Become a Tutor</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <div class="first-interaction">
-            <p>Find ways to succeed.</p>
-            <p>Understanding is possible.</p>
-            <button>Tutor for English</button>
-            <button>Tutor for Math</button>
-            <button>Tutor for Science</button>
-            <img src="Images/tutoring.jpg" alt="Tutor Whiteboard" width="500" height="500">
         </div>
-        <div class="tutor-introduction">
-            <h2>Qualified tutors who work to help you understand whatever you need.</h2>
-            <p>
-                Harness the endless amount of people who have been in places where you are now,
-                who have come to understand and can help you to do the same. 
-                We have tutors for virtually every topic you can think of, working in countless different ways,
-                all available with the click of a button.
-            
-                Each tutor is carefully verified to ensure they meet high standards of knowledge, teaching skills, 
-                and professionalism. Our tutors come from diverse backgrounds and possess a wide range of skills 
-                and expertise across various subjects.
-            </p>
-            <button>Find the Perfect Tutor</button>
-        </div>
-        <div class="tutor-process">
-            <h3>Process to find a Tutor</h3>
-            <figure>
-                <img src="#" alt="#">
-                <p>Log in to your EduConnect account</p>
-            </figure>
-            <figure>
-                <img src="#" alt="#">
-                <p>Browse available tutors by subject, topic, or those AI curates for you</p>
-            </figure>
-            <figure>
-                <img src="#" alt="#">
-                <p>Read tutor profiles, including qualifications and reviews</p>
-            </figure>
-            <figure>
-                <img src="#" alt="#">
-                <p>Choose your tutor and schedule a session that fits your time</p>
-            </figure>
-            <figure>
-                <img src="#" alt="#">
-                <p>Connect via your chosen platform (Zoom, Google Meet, etc.)</p>
-            </figure>
-        </div>
-        <div class="purpose">
-            <h4>Purpose</h4>
-            <p>
-                The purpose of this project is to develop an AI platform that enables students to input their academic and personal learning preferences, 
-                and then be automatically matched with a tutor who fits those needs. 
-                This platform aims to match compatible tutors with students based on their learning styles in order to achieve higher educational goals. 
-                This platform is designed to make finding a tutor easy and efficient.
-            </p>
-        </div>
-    </main>
-    <footer>
-        <h4>EduConnect &copy; 2025</h4>
-        <a href="tutor-portal.html">Become a Tutor</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
         <div class="social">
-            <a href="https://facebook.com" target="_blank">
-                <img src="images/facebook.webp" alt="fb icon" width="64" height="64">
+            <a href="https://facebook.com" target="_blank" rel="noopener">
+                <img src="Images/facebook.webp" alt="Facebook icon" width="32" height="32" loading="lazy">
             </a>
-            <a href="https://instagram.com" target="_blank">
-                <img src="images/instagram.webp" alt="instagram icon" width="64" height="64">
+            <a href="https://instagram.com" target="_blank" rel="noopener">
+                <img src="Images/instagram.webp" alt="Instagram icon" width="32" height="32" loading="lazy">
             </a>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (sessionStorage.getItem('educonnect_logged_in') === 'true') {
+                // Replace sign up buttons with dashboard links
+                const signupButtons = document.querySelectorAll('a[href="signup.html"]');
+                signupButtons.forEach(button => {
+                    button.href = 'dashboard.html';
+                    button.textContent = button.textContent.replace('Sign Up', 'Go to Dashboard');
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
