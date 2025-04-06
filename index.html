@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Hero Section */
         .hero {
@@ -112,9 +113,22 @@
         }
         
         .feature-icon {
-            font-size: 3rem;
-            color: var(--accent-color-2);
-            margin-bottom: 1.5rem;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 2rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            background-color: var(--accent-color-2);
         }
         
         .feature-card h3 {
@@ -307,9 +321,11 @@
         .category-card {
             background-color: white;
             border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
         
         .category-card:hover {
@@ -318,40 +334,55 @@
         }
         
         .category-img {
-            height: 150px;
             width: 100%;
+            height: 150px;
             object-fit: cover;
+        }
+        
+        .category-icon {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            display: block;
         }
         
         .category-content {
             padding: 1.5rem;
         }
         
-        .category-content h3 {
+        .category-card h3 {
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
+            margin: 0 0 0.5rem;
+            text-align: center;
         }
         
-        .category-content p {
-            color: #666;
-            font-size: 0.9rem;
+        .category-card p {
+            color: #555;
+            font-size: 0.95rem;
             margin-bottom: 1rem;
+            text-align: center;
+            padding: 0 20px;
         }
         
-        .category-topics {
+        .subject-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-bottom: 1rem;
+            justify-content: center;
+            padding: 0 20px;
         }
         
-        .category-topic {
-            background-color: var(--light-bg);
-            color: var(--primary-color);
+        .subject-tags span {
+            background-color: #f5f5f5;
+            color: #555;
             font-size: 0.8rem;
-            padding: 0.25rem 0.75rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
+        }
+        
+        .category-card .btn {
+            margin: auto 20px 20px;
         }
         
         /* Responsive Styles */
@@ -421,22 +452,28 @@
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">👨‍🏫</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
                     <h3>Qualified Tutors</h3>
                     <p>Our tutors are verified experts with extensive experience in their subjects, ensuring high-quality instruction.</p>
-                    <a href="#" class="btn btn-outline">Find a Tutor</a>
+                    <a href="dashboard.html" class="btn btn-outline">Find a Tutor</a>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
                     <h3>Perfect Match</h3>
                     <p>Our advanced matching algorithm connects you with tutors that fit your specific learning style and needs.</p>
-                    <a href="#" class="btn btn-outline">Learn More</a>
+                    <a href="dashboard.html?view=matching" class="btn btn-outline">Learn More</a>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">💻</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
                     <h3>Flexible Learning</h3>
                     <p>Choose between online and in-person sessions that fit your schedule and preferred learning environment.</p>
-                    <a href="#" class="btn btn-outline">View Options</a>
+                    <a href="dashboard.html?view=options" class="btn btn-outline">View Options</a>
                 </div>
             </div>
         </section>
@@ -479,56 +516,48 @@
             </div>
             <div class="categories-grid">
                 <div class="category-card">
-                    <img src="Images/math-category.webp" alt="Mathematics" class="category-img">
-                    <div class="category-content">
-                        <h3>Mathematics</h3>
-                        <p>Master mathematical concepts with expert guidance</p>
-                        <div class="category-topics">
-                            <span class="category-topic">Algebra</span>
-                            <span class="category-topic">Calculus</span>
-                            <span class="category-topic">Geometry</span>
-                        </div>
-                        <a href="dashboard.html" class="btn btn-outline">Find Tutors</a>
+                    <img src="Images/math-icon.png" alt="Mathematics" class="category-icon" width="100" height="100">
+                    <h3>Mathematics</h3>
+                    <p>Master mathematical concepts with expert guidance</p>
+                    <div class="subject-tags">
+                        <span>Algebra</span>
+                        <span>Calculus</span>
+                        <span>Geometry</span>
                     </div>
+                    <a href="dashboard.html?filter=mathematics" class="btn">Find Tutors</a>
                 </div>
                 <div class="category-card">
-                    <img src="Images/science-category.webp" alt="Science" class="category-img">
-                    <div class="category-content">
-                        <h3>Science</h3>
-                        <p>Explore scientific principles with hands-on learning</p>
-                        <div class="category-topics">
-                            <span class="category-topic">Physics</span>
-                            <span class="category-topic">Chemistry</span>
-                            <span class="category-topic">Biology</span>
-                        </div>
-                        <a href="dashboard.html" class="btn btn-outline">Find Tutors</a>
+                    <img src="Images/science-icon.png" alt="Science" class="category-icon" width="100" height="100">
+                    <h3>Science</h3>
+                    <p>Explore scientific principles with hands-on learning</p>
+                    <div class="subject-tags">
+                        <span>Physics</span>
+                        <span>Chemistry</span>
+                        <span>Biology</span>
                     </div>
+                    <a href="dashboard.html?filter=science" class="btn">Find Tutors</a>
                 </div>
                 <div class="category-card">
-                    <img src="Images/english-category.webp" alt="English" class="category-img">
-                    <div class="category-content">
-                        <h3>English</h3>
-                        <p>Improve your writing, reading, and speaking skills</p>
-                        <div class="category-topics">
-                            <span class="category-topic">Writing</span>
-                            <span class="category-topic">Literature</span>
-                            <span class="category-topic">Grammar</span>
-                        </div>
-                        <a href="dashboard.html" class="btn btn-outline">Find Tutors</a>
+                    <img src="Images/english-icon.png" alt="English" class="category-icon" width="100" height="100">
+                    <h3>English</h3>
+                    <p>Improve your writing, reading, and speaking skills</p>
+                    <div class="subject-tags">
+                        <span>Writing</span>
+                        <span>Literature</span>
+                        <span>Grammar</span>
                     </div>
+                    <a href="dashboard.html?filter=english" class="btn">Find Tutors</a>
                 </div>
                 <div class="category-card">
-                    <img src="Images/language-category.webp" alt="Languages" class="category-img">
-                    <div class="category-content">
-                        <h3>Languages</h3>
-                        <p>Learn new languages with native-speaking tutors</p>
-                        <div class="category-topics">
-                            <span class="category-topic">Spanish</span>
-                            <span class="category-topic">French</span>
-                            <span class="category-topic">Chinese</span>
-                        </div>
-                        <a href="dashboard.html" class="btn btn-outline">Find Tutors</a>
+                    <img src="Images/languages-icon.png" alt="Languages" class="category-icon" width="100" height="100">
+                    <h3>Languages</h3>
+                    <p>Learn new languages with native-speaking tutors</p>
+                    <div class="subject-tags">
+                        <span>Spanish</span>
+                        <span>French</span>
+                        <span>Chinese</span>
                     </div>
+                    <a href="dashboard.html?filter=languages" class="btn">Find Tutors</a>
                 </div>
             </div>
         </section>
@@ -544,8 +573,8 @@
                     <div class="testimonial-quote">"</div>
                     <p class="testimonial-text">My son was struggling with calculus until we found his tutor through EduConnect. His grades improved dramatically in just a few weeks, and he now feels confident in his math abilities.</p>
                     <div class="testimonial-author">
-                        <img src="Images/testimonial1.webp" alt="Sarah Johnson" class="author-image">
-                        <div class="author-info">
+                        <img src="Images/sarah-johnson.jpg" alt="Sarah Johnson" class="author-image">
+                        <div>
                             <h4>Sarah Johnson</h4>
                             <p>Parent of High School Student</p>
                         </div>
@@ -555,8 +584,8 @@
                     <div class="testimonial-quote">"</div>
                     <p class="testimonial-text">EduConnect made it easy to find a qualified tutor for my physics course. The personalized lessons were exactly what I needed to understand the complex concepts and ace my exams.</p>
                     <div class="testimonial-author">
-                        <img src="Images/testimonial2.webp" alt="David Chen" class="author-image">
-                        <div class="author-info">
+                        <img src="Images/david-chen.jpg" alt="David Chen" class="author-image">
+                        <div>
                             <h4>David Chen</h4>
                             <p>University Student</p>
                         </div>
@@ -566,8 +595,8 @@
                     <div class="testimonial-quote">"</div>
                     <p class="testimonial-text">As someone learning English as a second language, finding the right tutor was crucial. My EduConnect tutor tailored lessons to my needs and helped me become fluent much faster than I expected.</p>
                     <div class="testimonial-author">
-                        <img src="Images/testimonial3.webp" alt="Maria Rodriguez" class="author-image">
-                        <div class="author-info">
+                        <img src="Images/maria-rodriguez.jpg" alt="Maria Rodriguez" class="author-image">
+                        <div>
                             <h4>Maria Rodriguez</h4>
                             <p>ESL Student</p>
                         </div>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and edit your EduConnect profile">
+    <title>My Profile - EduConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 120px auto 4rem;
+            padding: 0 1rem;
+        }
+        
+        .profile-header {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            font-weight: 500;
+        }
+        
+        .profile-info h1 {
+            margin: 0 0 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .profile-info p {
+            margin: 0;
+            color: #555;
+        }
+        
+        .profile-email {
+            margin-bottom: 1rem;
+        }
+        
+        .profile-account-type {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .profile-sections {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .profile-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-title {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        .edit-button {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .edit-button:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .profile-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .detail-group {
+            margin-bottom: 1rem;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #777;
+            margin-bottom: 0.3rem;
+        }
+        
+        .detail-value {
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .save-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .save-button:hover {
+            background-color: var(--accent-color-2);
+        }
+        
+        .cancel-button {
+            background-color: transparent;
+            border: 1px solid #ddd;
+            color: #555;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cancel-button:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .form-buttons {
+            margin-top: 2rem;
+        }
+        
+        .back-link {
+            margin-top: 2rem;
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .profile-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>EduConnect</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tutor-portal.html">Become a Tutor</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-picture" id="profile-picture"></div>
+            <div class="profile-info">
+                <h1 id="profile-name">Loading...</h1>
+                <p class="profile-email" id="profile-email">Loading...</p>
+                <div class="profile-account-type" id="profile-account-type">Loading...</div>
+            </div>
+        </div>
+        
+        <div class="profile-sections">
+            <div class="profile-section">
+                <div class="section-header">
+                    <h2 class="section-title">Personal Information</h2>
+                    <button class="edit-button" id="edit-personal">Edit</button>
+                </div>
+                
+                <div class="profile-details" id="personal-info-view">
+                    <div class="detail-group">
+                        <div class="detail-label">First Name</div>
+                        <div class="detail-value" id="first-name-value">Loading...</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Last Name</div>
+                        <div class="detail-value" id="last-name-value">Loading...</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value" id="email-value">Loading...</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Account Type</div>
+                        <div class="detail-value" id="account-type-value">Loading...</div>
+                    </div>
+                </div>
+                
+                <form class="profile-form hidden" id="personal-info-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" name="first-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" name="last-name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" disabled>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="cancel-button" id="cancel-personal">Cancel</button>
+                        <button type="submit" class="save-button">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="profile-section">
+                <div class="section-header">
+                    <h2 class="section-title">Education & Subjects</h2>
+                    <button class="edit-button" id="edit-education">Edit</button>
+                </div>
+                
+                <div class="profile-details" id="education-view">
+                    <div class="detail-group">
+                        <div class="detail-label">Education Level</div>
+                        <div class="detail-value" id="education-level-value">Loading...</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Primary Subject Interest</div>
+                        <div class="detail-value" id="subject-interest-value">Loading...</div>
+                    </div>
+                </div>
+                
+                <form class="profile-form hidden" id="education-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="education-level">Education Level</label>
+                            <select id="education-level" name="education-level">
+                                <option value="high-school">High School</option>
+                                <option value="undergraduate">Undergraduate</option>
+                                <option value="graduate">Graduate</option>
+                                <option value="professional">Professional</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject-interest">Primary Subject Interest</label>
+                            <select id="subject-interest" name="subject-interest">
+                                <option value="math">Mathematics</option>
+                                <option value="science">Science</option>
+                                <option value="english">English</option>
+                                <option value="history">History</option>
+                                <option value="foreign-language">Foreign Language</option>
+                                <option value="computer-science">Computer Science</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="cancel-button" id="cancel-education">Cancel</button>
+                        <button type="submit" class="save-button">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+    </div>
+
+    <footer>
+        <div class="footer-info">
+            <h4>EduConnect &copy; 2025</h4>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="tutor-portal.html">Become a Tutor</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="social">
+            <a href="https://facebook.com" target="_blank" rel="noopener">
+                <img src="Images/facebook.webp" alt="Facebook icon" width="32" height="32" loading="lazy">
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener">
+                <img src="Images/instagram.webp" alt="Instagram icon" width="32" height="32" loading="lazy">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (sessionStorage.getItem('educonnect_logged_in') !== 'true') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Get user data from session storage
+            const userName = sessionStorage.getItem('educonnect_name') || 'User';
+            const userEmail = sessionStorage.getItem('educonnect_user_email') || sessionStorage.getItem('educonnect_email') || 'user@example.com';
+            const accountType = sessionStorage.getItem('educonnect_account_type') || 'student';
+            const loginMethod = sessionStorage.getItem('educonnect_login_method');
+            
+            // Parse the user's name to get first and last names
+            let firstName = userName;
+            let lastName = '';
+            
+            if (userName.includes(' ')) {
+                const nameParts = userName.split(' ');
+                firstName = nameParts[0];
+                lastName = nameParts.slice(1).join(' ');
+            }
+            
+            // Update profile header
+            document.getElementById('profile-name').textContent = userName;
+            document.getElementById('profile-email').textContent = userEmail;
+            document.getElementById('profile-account-type').textContent = accountType.charAt(0).toUpperCase() + accountType.slice(1);
+            
+            // Set profile picture initial
+            const profilePicture = document.getElementById('profile-picture');
+            profilePicture.textContent = userName.charAt(0).toUpperCase();
+            
+            // Update personal information view
+            document.getElementById('first-name-value').textContent = firstName;
+            document.getElementById('last-name-value').textContent = lastName;
+            document.getElementById('email-value').textContent = userEmail;
+            document.getElementById('account-type-value').textContent = accountType.charAt(0).toUpperCase() + accountType.slice(1);
+            
+            // Set form values
+            document.getElementById('first-name').value = firstName;
+            document.getElementById('last-name').value = lastName;
+            document.getElementById('email').value = userEmail;
+            
+            // Get stored education level and subject interest (or set defaults)
+            const educationLevel = sessionStorage.getItem('educonnect_education_level') || 'undergraduate';
+            const subjectInterest = sessionStorage.getItem('educonnect_subject_interest') || 'math';
+            
+            // Update education view
+            const educationLevelDisplay = {
+                'high-school': 'High School',
+                'undergraduate': 'Undergraduate',
+                'graduate': 'Graduate',
+                'professional': 'Professional'
+            };
+            
+            const subjectInterestDisplay = {
+                'math': 'Mathematics',
+                'science': 'Science',
+                'english': 'English',
+                'history': 'History',
+                'foreign-language': 'Foreign Language',
+                'computer-science': 'Computer Science',
+                'other': 'Other'
+            };
+            
+            document.getElementById('education-level-value').textContent = educationLevelDisplay[educationLevel] || 'Undergraduate';
+            document.getElementById('subject-interest-value').textContent = subjectInterestDisplay[subjectInterest] || 'Mathematics';
+            
+            // Set education form values
+            document.getElementById('education-level').value = educationLevel;
+            document.getElementById('subject-interest').value = subjectInterest;
+            
+            // Edit personal information
+            document.getElementById('edit-personal').addEventListener('click', function() {
+                document.getElementById('personal-info-view').classList.add('hidden');
+                document.getElementById('personal-info-form').classList.remove('hidden');
+            });
+            
+            // Cancel personal information edit
+            document.getElementById('cancel-personal').addEventListener('click', function() {
+                document.getElementById('personal-info-form').classList.add('hidden');
+                document.getElementById('personal-info-view').classList.remove('hidden');
+                
+                // Reset form values
+                document.getElementById('first-name').value = firstName;
+                document.getElementById('last-name').value = lastName;
+            });
+            
+            // Save personal information
+            document.getElementById('personal-info-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const newFirstName = document.getElementById('first-name').value.trim();
+                const newLastName = document.getElementById('last-name').value.trim();
+                
+                if (!newFirstName) {
+                    alert('Please enter your first name');
+                    return;
+                }
+                
+                // Update session storage
+                const newFullName = newLastName ? `${newFirstName} ${newLastName}` : newFirstName;
+                sessionStorage.setItem('educonnect_name', newFullName);
+                
+                // Update UI
+                document.getElementById('profile-name').textContent = newFullName;
+                document.getElementById('first-name-value').textContent = newFirstName;
+                document.getElementById('last-name-value').textContent = newLastName;
+                document.getElementById('profile-picture').textContent = newFirstName.charAt(0).toUpperCase();
+                
+                // Hide form, show view
+                document.getElementById('personal-info-form').classList.add('hidden');
+                document.getElementById('personal-info-view').classList.remove('hidden');
+                
+                // Update variables
+                firstName = newFirstName;
+                lastName = newLastName;
+            });
+            
+            // Edit education & subjects
+            document.getElementById('edit-education').addEventListener('click', function() {
+                document.getElementById('education-view').classList.add('hidden');
+                document.getElementById('education-form').classList.remove('hidden');
+            });
+            
+            // Cancel education edit
+            document.getElementById('cancel-education').addEventListener('click', function() {
+                document.getElementById('education-form').classList.add('hidden');
+                document.getElementById('education-view').classList.remove('hidden');
+                
+                // Reset form values
+                document.getElementById('education-level').value = educationLevel;
+                document.getElementById('subject-interest').value = subjectInterest;
+            });
+            
+            // Save education information
+            document.getElementById('education-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const newEducationLevel = document.getElementById('education-level').value;
+                const newSubjectInterest = document.getElementById('subject-interest').value;
+                
+                // Update session storage
+                sessionStorage.setItem('educonnect_education_level', newEducationLevel);
+                sessionStorage.setItem('educonnect_subject_interest', newSubjectInterest);
+                
+                // Update UI
+                document.getElementById('education-level-value').textContent = educationLevelDisplay[newEducationLevel];
+                document.getElementById('subject-interest-value').textContent = subjectInterestDisplay[newSubjectInterest];
+                
+                // Hide form, show view
+                document.getElementById('education-form').classList.add('hidden');
+                document.getElementById('education-view').classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

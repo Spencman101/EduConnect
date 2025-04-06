@@ -588,10 +588,12 @@
                     sessionStorage.setItem('educonnect_name', `${firstNameInput.value.trim()} ${lastNameInput.value.trim()}`);
                     sessionStorage.setItem('educonnect_email', email);
                     sessionStorage.setItem('educonnect_account_type', accountType);
+                    sessionStorage.setItem('educonnect_logged_in', 'true');
+                    sessionStorage.setItem('educonnect_user_email', email);
                     
                     // Redirect to login page after delay
                     setTimeout(function() {
-                        window.location.href = 'login.html';
+                        window.location.href = 'dashboard.html';
                     }, 3000);
                 }, 2000);
             }
@@ -630,6 +632,16 @@
             signupButton.textContent = `Connecting to ${provider}...`;
             
             setTimeout(function() {
+                // Generate a random first name based on the provider
+                let userNames = {
+                    'Google': ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey'],
+                    'Microsoft': ['Sam', 'Jamie', 'Riley', 'Avery', 'Quinn'],
+                    'Facebook': ['Charlie', 'Skyler', 'Dakota', 'Jesse', 'Peyton']
+                };
+                
+                // Get a random name from the array for this provider
+                const randomName = userNames[provider][Math.floor(Math.random() * userNames[provider].length)];
+                
                 // Show success message
                 successMessage.textContent = `Your account has been created with ${provider}! Redirecting...`;
                 successMessage.style.display = 'block';
@@ -638,10 +650,12 @@
                 // Save login state
                 sessionStorage.setItem('educonnect_registered', 'true');
                 sessionStorage.setItem('educonnect_login_method', provider);
+                sessionStorage.setItem('educonnect_logged_in', 'true');
+                sessionStorage.setItem('educonnect_name', randomName);
                 
                 // Redirect to dashboard (or login) after delay
                 setTimeout(function() {
-                    window.location.href = 'login.html';
+                    window.location.href = 'dashboard.html';
                 }, 3000);
             }, 2000);
         }

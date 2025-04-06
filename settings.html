@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage your EduConnect account settings">
+    <title>Settings - EduConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .settings-container {
+            max-width: 800px;
+            margin: 120px auto 4rem;
+            padding: 0 1rem;
+        }
+        
+        .settings-header {
+            margin-bottom: 2rem;
+        }
+        
+        .settings-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .settings-header p {
+            color: #555;
+        }
+        
+        .settings-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-title {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+        
+        .toggle-switch input {
+            display: none;
+        }
+        
+        .toggle-slider {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .toggle-slider:before {
+            content: "";
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-switch input:checked + .toggle-slider {
+            background-color: var(--primary-color);
+        }
+        
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .preference-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .preference-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .preference-info {
+            flex: 1;
+        }
+        
+        .preference-title {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+        
+        .preference-description {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .preference-control {
+            margin-left: 2rem;
+        }
+        
+        .save-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .save-button:hover {
+            background-color: var(--accent-color-2);
+        }
+        
+        .action-button {
+            background-color: transparent;
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .action-button:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .danger-button {
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        
+        .danger-button:hover {
+            background-color: #fff8f8;
+        }
+        
+        .danger-section {
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .danger-title {
+            color: #e74c3c;
+            margin-bottom: 0.5rem;
+        }
+        
+        .danger-description {
+            color: #777;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .back-link {
+            margin-top: 2rem;
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .save-message {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 4px;
+            background-color: #d4edda;
+            color: #155724;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>EduConnect</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tutor-portal.html">Become a Tutor</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="settings-container">
+        <div class="settings-header">
+            <h1>Settings</h1>
+            <p>Manage your account preferences</p>
+        </div>
+        
+        <div class="settings-section">
+            <div class="section-header">
+                <h2 class="section-title">Notification Settings</h2>
+            </div>
+            
+            <div class="preference-item">
+                <div class="preference-info">
+                    <div class="preference-title">Email Notifications</div>
+                    <div class="preference-description">Receive email notifications about bookings, messages, and updates</div>
+                </div>
+                <div class="preference-control">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="email-notifications" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="preference-item">
+                <div class="preference-info">
+                    <div class="preference-title">Session Reminders</div>
+                    <div class="preference-description">Receive reminders before your scheduled tutoring sessions</div>
+                </div>
+                <div class="preference-control">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="session-reminders" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="preference-item">
+                <div class="preference-info">
+                    <div class="preference-title">Marketing Updates</div>
+                    <div class="preference-description">Receive occasional updates about new features and promotions</div>
+                </div>
+                <div class="preference-control">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="marketing-updates">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="save-message" id="notification-save-message">Your notification preferences have been updated.</div>
+            <button class="save-button" id="save-notifications">Save Preferences</button>
+        </div>
+        
+        <div class="settings-section">
+            <div class="section-header">
+                <h2 class="section-title">Privacy Settings</h2>
+            </div>
+            
+            <div class="preference-item">
+                <div class="preference-info">
+                    <div class="preference-title">Profile Visibility</div>
+                    <div class="preference-description">Control who can see your profile information</div>
+                </div>
+                <div class="preference-control">
+                    <select id="profile-visibility">
+                        <option value="public">Public</option>
+                        <option value="contacts" selected>Contacts Only</option>
+                        <option value="private">Private</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="preference-item">
+                <div class="preference-info">
+                    <div class="preference-title">Online Status</div>
+                    <div class="preference-description">Show when you're online to tutors and other users</div>
+                </div>
+                <div class="preference-control">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="online-status" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="save-message" id="privacy-save-message">Your privacy settings have been updated.</div>
+            <button class="save-button" id="save-privacy">Save Settings</button>
+            
+            <div class="danger-section">
+                <h3 class="danger-title">Account Actions</h3>
+                <div class="preference-item">
+                    <div class="preference-info">
+                        <div class="preference-title">Delete Account</div>
+                        <div class="preference-description">Permanently delete your account and all associated data</div>
+                    </div>
+                    <div class="preference-control">
+                        <button class="action-button danger-button" id="delete-account">Delete Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+    </div>
+
+    <footer>
+        <div class="footer-info">
+            <h4>EduConnect &copy; 2025</h4>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="tutor-portal.html">Become a Tutor</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="social">
+            <a href="https://facebook.com" target="_blank" rel="noopener">
+                <img src="Images/facebook.webp" alt="Facebook icon" width="32" height="32" loading="lazy">
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener">
+                <img src="Images/instagram.webp" alt="Instagram icon" width="32" height="32" loading="lazy">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (sessionStorage.getItem('educonnect_logged_in') !== 'true') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Handle notification settings
+            const saveNotificationsButton = document.getElementById('save-notifications');
+            const notificationSaveMessage = document.getElementById('notification-save-message');
+            
+            saveNotificationsButton.addEventListener('click', function() {
+                // Get values
+                const emailNotifications = document.getElementById('email-notifications').checked;
+                const sessionReminders = document.getElementById('session-reminders').checked;
+                const marketingUpdates = document.getElementById('marketing-updates').checked;
+                
+                // Save to session storage
+                sessionStorage.setItem('educonnect_email_notifications', emailNotifications);
+                sessionStorage.setItem('educonnect_session_reminders', sessionReminders);
+                sessionStorage.setItem('educonnect_marketing_updates', marketingUpdates);
+                
+                // Show save message
+                notificationSaveMessage.style.display = 'block';
+                
+                // Hide message after 3 seconds
+                setTimeout(function() {
+                    notificationSaveMessage.style.display = 'none';
+                }, 3000);
+            });
+            
+            // Handle privacy settings
+            const savePrivacyButton = document.getElementById('save-privacy');
+            const privacySaveMessage = document.getElementById('privacy-save-message');
+            
+            savePrivacyButton.addEventListener('click', function() {
+                // Get values
+                const profileVisibility = document.getElementById('profile-visibility').value;
+                const onlineStatus = document.getElementById('online-status').checked;
+                
+                // Save to session storage
+                sessionStorage.setItem('educonnect_profile_visibility', profileVisibility);
+                sessionStorage.setItem('educonnect_online_status', onlineStatus);
+                
+                // Show save message
+                privacySaveMessage.style.display = 'block';
+                
+                // Hide message after 3 seconds
+                setTimeout(function() {
+                    privacySaveMessage.style.display = 'none';
+                }, 3000);
+            });
+            
+            // Handle delete account
+            const deleteAccountButton = document.getElementById('delete-account');
+            
+            deleteAccountButton.addEventListener('click', function() {
+                const confirmed = confirm('Are you sure you want to delete your account? This action cannot be undone.');
+                
+                if (confirmed) {
+                    // Clear all session storage
+                    sessionStorage.clear();
+                    
+                    // Redirect to home page
+                    alert('Your account has been deleted. You will be redirected to the home page.');
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            // Load saved settings from session storage (if any)
+            if (sessionStorage.getItem('educonnect_email_notifications') === 'false') {
+                document.getElementById('email-notifications').checked = false;
+            }
+            
+            if (sessionStorage.getItem('educonnect_session_reminders') === 'false') {
+                document.getElementById('session-reminders').checked = false;
+            }
+            
+            if (sessionStorage.getItem('educonnect_marketing_updates') === 'true') {
+                document.getElementById('marketing-updates').checked = true;
+            }
+            
+            if (sessionStorage.getItem('educonnect_profile_visibility')) {
+                document.getElementById('profile-visibility').value = sessionStorage.getItem('educonnect_profile_visibility');
+            }
+            
+            if (sessionStorage.getItem('educonnect_online_status') === 'false') {
+                document.getElementById('online-status').checked = false;
+            }
+        });
+    </script>
+</body>
+</html>

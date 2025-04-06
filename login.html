@@ -330,7 +330,12 @@
                     // Store login information
                     sessionStorage.setItem('educonnect_logged_in', 'true');
                     sessionStorage.setItem('educonnect_user_email', email);
-                    sessionStorage.setItem('educonnect_name', 'Demo User');
+                    
+                    // Set a personalized name based on the email
+                    const firstName = email.split('@')[0].split('.')[0];
+                    // Capitalize the first letter
+                    const capitalizedName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+                    sessionStorage.setItem('educonnect_name', capitalizedName);
                     
                     // Show success message
                     successMessage.style.display = 'block';
@@ -377,9 +382,19 @@
             loginButton.textContent = `Connecting to ${provider}...`;
             
             setTimeout(function() {
+                // Generate a random first name based on the provider
+                let userNames = {
+                    'Google': ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey'],
+                    'Microsoft': ['Sam', 'Jamie', 'Riley', 'Avery', 'Quinn'],
+                    'Facebook': ['Charlie', 'Skyler', 'Dakota', 'Jesse', 'Peyton']
+                };
+                
+                // Get a random name from the array for this provider
+                const randomName = userNames[provider][Math.floor(Math.random() * userNames[provider].length)];
+                
                 // Store login information
                 sessionStorage.setItem('educonnect_logged_in', 'true');
-                sessionStorage.setItem('educonnect_name', 'Social User');
+                sessionStorage.setItem('educonnect_name', randomName);
                 sessionStorage.setItem('educonnect_login_method', provider);
                 
                 // Show success message

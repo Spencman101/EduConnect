@@ -143,6 +143,8 @@
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 380px;
+            margin: 0 auto;
         }
         
         .tutor-card:hover {
@@ -151,9 +153,12 @@
         }
         
         .tutor-image {
-            height: 200px;
+            height: 400px;
             width: 100%;
             object-fit: cover;
+            background-color: #f5f5f5;
+            border-radius: 8px 8px 0 0;
+            padding: 0;
         }
         
         .tutor-info {
@@ -215,22 +220,40 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-        }
-        
-        .profile-pic {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        .profile-dropdown {
             position: relative;
         }
         
-        .dropdown-menu {
+        .profile-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .profile-initial {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .profile-dropdown {
             position: absolute;
-            top: 100%;
+            top: 60px;
             right: 0;
             background-color: white;
             border-radius: 8px;
@@ -241,36 +264,29 @@
             display: none;
         }
         
-        .dropdown-menu.open {
+        .profile-dropdown.active {
             display: block;
         }
         
-        .dropdown-menu ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .dropdown-menu li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .dropdown-menu a {
+        .profile-dropdown a {
             color: #555;
             text-decoration: none;
             transition: color 0.3s ease;
             display: block;
             padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
         }
         
-        .dropdown-menu a:hover {
+        .profile-dropdown a:last-child {
+            border-bottom: none;
+        }
+        
+        .profile-dropdown a:hover {
             color: var(--primary-color);
         }
         
-        .logout-btn {
+        #logout-link {
             color: #e74c3c;
-            border-top: 1px solid #eee;
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
         }
         
         .subject-details {
@@ -367,6 +383,221 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* Booking Modal Styles */
+        .booking-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .booking-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .booking-modal {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .booking-modal-overlay.active .booking-modal {
+            transform: translateY(0);
+        }
+        
+        .booking-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .booking-modal-header h2 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .booking-modal-content {
+            padding: 1.5rem;
+        }
+        
+        .tutor-preview {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .booking-tutor-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .form-group input, 
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .radio-group input[type="radio"] {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        
+        .radio-group label {
+            display: inline;
+            margin: 0;
+        }
+        
+        .book-confirm-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .book-confirm-button:hover {
+            background-color: var(--accent-color-2);
+        }
+        
+        .booking-confirmation {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .booking-confirmation h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .booking-details {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        
+        .booking-details p {
+            margin: 0.5rem 0;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .tutor-preview {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+        
+        /* Dashboard info box styles */
+        .dashboard-info-box {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-info-box h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .dashboard-info-box p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .dashboard-info-box ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .dashboard-info-box li {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        
+        .learning-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .learning-option {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .learning-option h3 {
+            color: var(--accent-color-2);
+            margin-bottom: 0.75rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .learning-options {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -386,17 +617,15 @@
         <div class="dashboard-header">
             <h1 class="welcome-user">Welcome, <span id="user-name">Student</span>!</h1>
             <div class="user-profile">
-                <div class="profile-dropdown">
-                    <img src="Images/default-profile.webp" alt="Profile" class="profile-pic" id="profile-pic">
-                    <div class="dropdown-menu" id="dropdown-menu">
-                        <ul>
-                            <li><a href="#">My Profile</a></li>
-                            <li><a href="#">My Bookings</a></li>
-                            <li><a href="#">Messages</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li><a href="#" class="logout-btn" id="logout-btn">Logout</a></li>
-                        </ul>
-                    </div>
+                <div class="profile-button" id="profile-button">
+                    <span id="profile-initial">T</span>
+                </div>
+                <div class="profile-dropdown" id="profile-dropdown">
+                    <a href="profile.html">My Profile</a>
+                    <a href="bookings.html">My Bookings</a>
+                    <a href="messages.html">Messages</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="#" id="logout-link">Logout</a>
                 </div>
             </div>
         </div>
@@ -506,6 +735,70 @@
         </div>
     </div>
 
+    <!-- Booking Modal -->
+    <div class="booking-modal-overlay" id="booking-modal-overlay">
+        <div class="booking-modal">
+            <div class="booking-modal-header">
+                <h2>Book a Session</h2>
+                <button class="close-modal" id="close-booking-modal">&times;</button>
+            </div>
+            <div class="booking-modal-content">
+                <div class="tutor-preview">
+                    <img src="" alt="Tutor" id="booking-tutor-img" class="booking-tutor-img">
+                    <div>
+                        <h3 id="booking-tutor-name"></h3>
+                        <p id="booking-tutor-subject"></p>
+                        <p><span id="booking-tutor-price"></span></p>
+                    </div>
+                </div>
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="session-date">Date</label>
+                        <input type="date" id="session-date" required min="">
+                    </div>
+                    <div class="form-group">
+                        <label for="session-time">Time</label>
+                        <select id="session-time" required>
+                            <option value="">Select a time</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="16:00">4:00 PM</option>
+                            <option value="17:00">5:00 PM</option>
+                            <option value="18:00">6:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="session-duration">Duration</label>
+                        <select id="session-duration" required>
+                            <option value="60">1 hour</option>
+                            <option value="90">1.5 hours</option>
+                            <option value="120">2 hours</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="session-topic">Topics to Cover</label>
+                        <textarea id="session-topic" rows="3" placeholder="Describe what you'd like to focus on in this session"></textarea>
+                    </div>
+                    <div class="form-group booking-type">
+                        <label>Session Type</label>
+                        <div class="radio-group">
+                            <input type="radio" id="session-online" name="session-type" value="online" checked>
+                            <label for="session-online">Online</label>
+                            
+                            <input type="radio" id="session-in-person" name="session-type" value="in-person">
+                            <label for="session-in-person">In-person</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="book-confirm-button">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-info">
             <h4>EduConnect &copy; 2025</h4>
@@ -536,37 +829,49 @@
             
             // Set user name and possibly profile pic
             const userName = document.getElementById('user-name');
+            const profileInitial = document.getElementById('profile-initial');
+            
             if (sessionStorage.getItem('educonnect_name')) {
-                userName.textContent = sessionStorage.getItem('educonnect_name').split(' ')[0];
+                const name = sessionStorage.getItem('educonnect_name');
+                userName.textContent = name.split(' ')[0];
+                profileInitial.textContent = name.charAt(0);
             } else if (sessionStorage.getItem('educonnect_user_email')) {
-                userName.textContent = sessionStorage.getItem('educonnect_user_email').split('@')[0];
+                const email = sessionStorage.getItem('educonnect_user_email');
+                const emailName = email.split('@')[0];
+                // Capitalize first letter and use as name
+                userName.textContent = emailName.charAt(0).toUpperCase() + emailName.slice(1);
+                profileInitial.textContent = email.charAt(0).toUpperCase();
             }
             
-            // Toggle profile dropdown
-            const profilePic = document.getElementById('profile-pic');
-            const dropdownMenu = document.getElementById('dropdown-menu');
+            // Handle profile dropdown toggle
+            const profileButton = document.querySelector('.profile-button');
+            const profileDropdown = document.getElementById('profile-dropdown');
             
-            profilePic.addEventListener('click', function() {
-                dropdownMenu.classList.toggle('open');
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!profilePic.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.classList.remove('open');
-                }
-            });
+            if (profileButton && profileDropdown) {
+                profileButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('active');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!profileDropdown.contains(e.target) && !profileButton.contains(e.target)) {
+                        profileDropdown.classList.remove('active');
+                    }
+                });
+            }
             
             // Handle logout
-            document.getElementById('logout-btn').addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Clear login session storage
-                sessionStorage.removeItem('educonnect_logged_in');
-                
-                // Redirect to login page
-                window.location.href = 'login.html';
-            });
+            const logoutLink = document.getElementById('logout-link');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Clear session storage
+                    sessionStorage.removeItem('educonnect_logged_in');
+                    // Redirect to home page
+                    window.location.href = 'index.html';
+                });
+            }
             
             // Toggle subject categories
             const categoryNames = document.querySelectorAll('.category-name');
@@ -609,6 +914,87 @@
                     showSubjectDetails(subject);
                 });
             });
+            
+            // Process URL parameters for specific views
+            function processUrlParameters() {
+                const urlParams = new URLSearchParams(window.location.search);
+                
+                // Handle filter parameter
+                const filter = urlParams.get('filter');
+                if (filter) {
+                    const filterBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+                    if (filterBtn) {
+                        filterBtn.click();
+                    }
+                }
+                
+                // Handle view parameter
+                const view = urlParams.get('view');
+                if (view) {
+                    switch(view) {
+                        case 'matching':
+                            // Show matching algorithm information
+                            const matchingInfo = `
+                                <div class="dashboard-info-box">
+                                    <h2>Our Matching Algorithm</h2>
+                                    <p>EduConnect uses an advanced algorithm to match you with the perfect tutor based on:</p>
+                                    <ul>
+                                        <li>Your learning style preferences</li>
+                                        <li>Subject requirements and difficulty level</li>
+                                        <li>Scheduling compatibility</li>
+                                        <li>Teaching style preferences</li>
+                                        <li>Previous success patterns with similar students</li>
+                                    </ul>
+                                    <p>Browse our recommended tutors below who match your profile:</p>
+                                </div>
+                            `;
+                            const tutorsContent = document.querySelector('.tutors-content');
+                            tutorsContent.insertAdjacentHTML('afterbegin', matchingInfo);
+                            break;
+                            
+                        case 'options':
+                            // Show learning options information
+                            const optionsInfo = `
+                                <div class="dashboard-info-box">
+                                    <h2>Flexible Learning Options</h2>
+                                    <p>Choose the learning environment that works best for you:</p>
+                                    
+                                    <div class="learning-options">
+                                        <div class="learning-option">
+                                            <h3>Online Learning</h3>
+                                            <p>Connect with tutors from anywhere using our integrated video platform:</p>
+                                            <ul>
+                                                <li>HD video and screen sharing</li>
+                                                <li>Interactive whiteboard</li>
+                                                <li>Session recording for later review</li>
+                                                <li>Built-in document sharing</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="learning-option">
+                                            <h3>In-Person Sessions</h3>
+                                            <p>Meet face-to-face at a location that works for both of you:</p>
+                                            <ul>
+                                                <li>Library study rooms</li>
+                                                <li>Campus locations</li>
+                                                <li>Coffee shops</li>
+                                                <li>Home tutoring</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <p>All tutors indicate their availability for each option.</p>
+                                </div>
+                            `;
+                            const tutorsContentOptions = document.querySelector('.tutors-content');
+                            tutorsContentOptions.insertAdjacentHTML('afterbegin', optionsInfo);
+                            break;
+                    }
+                }
+            }
+            
+            // Process URL parameters when page loads
+            processUrlParameters();
         });
         
         // Tutor data (in a real application, this would come from a database)
@@ -616,7 +1002,7 @@
             {
                 id: 1,
                 name: "Dr. Sarah Johnson",
-                image: "Images/tutor1.webp",
+                image: "Images/Dr-sarah-johnson.jpg",
                 subject: "Mathematics",
                 specialization: "Calculus, Differential Equations",
                 rating: 4.9,
@@ -628,7 +1014,7 @@
             {
                 id: 2,
                 name: "Prof. Michael Chen",
-                image: "Images/tutor2.webp",
+                image: "Images/Prof-Michael-Chen.jpg",
                 subject: "Physics",
                 specialization: "Mechanics, Electromagnetism",
                 rating: 4.8,
@@ -640,7 +1026,7 @@
             {
                 id: 3,
                 name: "Emma Rodriguez",
-                image: "Images/tutor3.webp",
+                image: "Images/Emma-Rodriguez.jpg",
                 subject: "English Literature",
                 specialization: "Essay Writing, Critical Analysis",
                 rating: 4.7,
@@ -652,7 +1038,7 @@
             {
                 id: 4,
                 name: "Dr. James Wilson",
-                image: "Images/tutor4.webp",
+                image: "Images/Dr-James-Wilson.jpg",
                 subject: "Chemistry",
                 specialization: "Organic Chemistry, Biochemistry",
                 rating: 4.9,
@@ -664,7 +1050,7 @@
             {
                 id: 5,
                 name: "Lisa Thompson",
-                image: "Images/tutor5.webp",
+                image: "Images/Lisa-Thompson.jpg",
                 subject: "Mathematics",
                 specialization: "Algebra, Geometry",
                 rating: 4.6,
@@ -676,7 +1062,7 @@
             {
                 id: 6,
                 name: "Robert Davis",
-                image: "Images/tutor6.webp",
+                image: "Images/Robert-Davis.jpg",
                 subject: "Computer Science",
                 specialization: "Programming, Algorithms",
                 rating: 4.8,
@@ -688,7 +1074,7 @@
             {
                 id: 7,
                 name: "Maria Garcia",
-                image: "Images/tutor7.webp",
+                image: "Images/Maria-Garcia.jpg",
                 subject: "Spanish",
                 specialization: "Conversation, Grammar",
                 rating: 4.9,
@@ -700,7 +1086,7 @@
             {
                 id: 8,
                 name: "David Kim",
-                image: "Images/tutor8.webp",
+                image: "Images/David-Kim.jpg",
                 subject: "Biology",
                 specialization: "Genetics, Cell Biology",
                 rating: 4.7,
@@ -712,7 +1098,7 @@
             {
                 id: 9,
                 name: "Jennifer Lewis",
-                image: "Images/tutor9.webp",
+                image: "Images/Jennifer-Lewis.jpg",
                 subject: "English",
                 specialization: "Grammar, Writing Skills",
                 rating: 4.8,
@@ -724,7 +1110,7 @@
             {
                 id: 10,
                 name: "Prof. Thomas Wright",
-                image: "Images/tutor10.webp",
+                image: "Images/Prof-Thomas-Wright.jpg",
                 subject: "History",
                 specialization: "World History, U.S. History",
                 rating: 4.9,
@@ -736,7 +1122,7 @@
             {
                 id: 11,
                 name: "Sophia Martinez",
-                image: "Images/tutor11.webp",
+                image: "Images/Sophia-Martinez.jpg",
                 subject: "Mathematics",
                 specialization: "Statistics, Probability",
                 rating: 4.7,
@@ -748,7 +1134,7 @@
             {
                 id: 12,
                 name: "Dr. Alexander Lee",
-                image: "Images/tutor12.webp",
+                image: "Images/Dr-Alexander-Lee.jpg",
                 subject: "Physics",
                 specialization: "Quantum Mechanics, Relativity",
                 rating: 4.8,
@@ -871,17 +1257,109 @@
                     </div>
                     <p class="tutor-description">${tutor.description}</p>
                     <p class="tutor-price">${tutor.price}</p>
-                    <button class="book-button">Book Session</button>
+                    <button class="book-button" data-tutor-id="${tutor.id}">Book Session</button>
                 </div>
             `;
             
             // Add event listener to book button
             const bookButton = card.querySelector('.book-button');
             bookButton.addEventListener('click', function() {
-                alert(`Booking session with ${tutor.name}. This would lead to a scheduling page in a real application.`);
+                openBookingModal(tutor);
             });
             
             return card;
+        }
+        
+        // Open booking modal
+        function openBookingModal(tutor) {
+            const modal = document.getElementById('booking-modal-overlay');
+            
+            // Set tutor info in modal
+            document.getElementById('booking-tutor-img').src = tutor.image;
+            document.getElementById('booking-tutor-name').textContent = tutor.name;
+            document.getElementById('booking-tutor-subject').textContent = `${tutor.subject}: ${tutor.specialization}`;
+            document.getElementById('booking-tutor-price').textContent = tutor.price;
+            
+            // Set min date to today
+            const today = new Date();
+            const dateString = today.toISOString().split('T')[0];
+            document.getElementById('session-date').min = dateString;
+            
+            // Show modal
+            modal.classList.add('active');
+            
+            // Handle form submission
+            const bookingForm = document.getElementById('booking-form');
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitBooking(tutor);
+            });
+        }
+        
+        // Close booking modal
+        function closeBookingModal() {
+            const modal = document.getElementById('booking-modal-overlay');
+            modal.classList.remove('active');
+            
+            // Reset form
+            document.getElementById('booking-form').reset();
+        }
+        
+        // Submit booking
+        function submitBooking(tutor) {
+            const date = document.getElementById('session-date').value;
+            const time = document.getElementById('session-time').value;
+            const duration = document.getElementById('session-duration').value;
+            const topic = document.getElementById('session-topic').value;
+            const sessionType = document.querySelector('input[name="session-type"]:checked').value;
+            
+            // In a real app, you'd send this data to a server
+            // For now, we'll just show a confirmation
+            
+            const modalContent = document.querySelector('.booking-modal-content');
+            const formattedDate = new Date(`${date}T${time}`).toLocaleString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            });
+            
+            modalContent.innerHTML = `
+                <div class="booking-confirmation">
+                    <h3>Booking Confirmed!</h3>
+                    <p>Your session with ${tutor.name} has been scheduled.</p>
+                    
+                    <div class="booking-details">
+                        <p><strong>Date & Time:</strong> ${formattedDate}</p>
+                        <p><strong>Duration:</strong> ${duration === '60' ? '1 hour' : duration === '90' ? '1.5 hours' : '2 hours'}</p>
+                        <p><strong>Subject:</strong> ${tutor.subject}</p>
+                        <p><strong>Topics:</strong> ${topic || 'General tutoring'}</p>
+                        <p><strong>Session Type:</strong> ${sessionType === 'online' ? 'Online' : 'In-person'}</p>
+                        <p><strong>Price:</strong> ${tutor.price} × ${duration / 60} = $${(parseInt(tutor.price.replace('$', '').replace('/hour', '')) * duration / 60).toFixed(2)}</p>
+                    </div>
+                    
+                    <p>You will receive a confirmation email shortly with all the details and instructions.</p>
+                    
+                    <button class="book-confirm-button" onclick="closeBookingModal()">Close</button>
+                </div>
+            `;
+            
+            // In a real app, you'd store this booking in a database
+            // For now, we'll just store it in sessionStorage for demonstration
+            const bookings = JSON.parse(sessionStorage.getItem('educonnect_bookings') || '[]');
+            bookings.push({
+                tutorId: tutor.id,
+                tutorName: tutor.name,
+                subject: tutor.subject,
+                date: formattedDate,
+                duration: duration,
+                sessionType: sessionType,
+                topic: topic
+            });
+            sessionStorage.setItem('educonnect_bookings', JSON.stringify(bookings));
         }
         
         // Filter tutors based on selected subject
@@ -976,6 +1454,19 @@
             
             return null;
         }
+        
+        // Initialize event listeners for modal
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close modal when clicking the close button
+            document.getElementById('close-booking-modal').addEventListener('click', closeBookingModal);
+            
+            // Close modal when clicking outside the modal
+            document.getElementById('booking-modal-overlay').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeBookingModal();
+                }
+            });
+        });
     </script>
 </body>
 </html>
